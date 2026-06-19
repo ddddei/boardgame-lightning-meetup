@@ -18,6 +18,10 @@
         --soft-line: #6b7280;
         --accent: #0f2a44;
         --shade: #f3f4f6;
+        --neon-pink: #ff2fb3;
+        --neon-blue: #00b7ff;
+        --neon-yellow: #ffd43b;
+        --neon-green: #39ff8a;
         --space-1: 1.2mm;
         --space-2: 2mm;
         --space-3: 3mm;
@@ -49,7 +53,8 @@
         grid-template-columns: 1fr 72mm;
         gap: var(--space-4);
         align-items: end;
-        border-bottom: 2pt solid var(--line);
+        border-bottom: 1pt solid var(--line);
+        box-shadow: inset 0 -0.6mm 0 var(--neon-green);
         padding-bottom: var(--space-2);
         margin-bottom: var(--space-3);
       }
@@ -66,6 +71,8 @@
       h1 {
         margin: 0 0 var(--space-1);
         color: var(--accent);
+        border-left: 1.2mm solid var(--neon-green);
+        padding-left: var(--space-2);
         font-size: 19.5pt;
         line-height: 1.05;
       }
@@ -79,6 +86,7 @@
 
       .notice {
         border: 1.6pt solid var(--line);
+        border-left: 1.4mm solid var(--neon-yellow);
         padding: var(--space-2);
         color: var(--accent);
         font-size: 8.9pt;
@@ -88,7 +96,7 @@
       .notice strong {
         display: block;
         margin-bottom: var(--space-1);
-        border-bottom: 1pt solid var(--soft-line);
+        border-bottom: 1pt solid var(--neon-blue);
         padding-bottom: var(--space-1);
         color: var(--ink);
       }
@@ -116,6 +124,7 @@
         margin: 0;
         border-bottom: 1pt solid var(--line);
         background: var(--shade);
+        box-shadow: inset 0.8mm 0 0 var(--neon-green);
         padding: var(--space-1) var(--space-2);
         color: var(--accent);
         font-size: 10.8pt;
@@ -169,6 +178,7 @@
         color: var(--ink);
         font-weight: 900;
         text-decoration: underline;
+        text-decoration-color: var(--neon-pink);
         text-underline-offset: 2px;
       }
 
@@ -180,6 +190,7 @@
 
       .flow-card {
         border: 1pt solid var(--line);
+        border-top: 1.1mm solid var(--neon-blue);
         padding: var(--space-2);
         min-height: 21mm;
       }
@@ -204,6 +215,7 @@
 
       .timebox {
         border-width: 1.6pt;
+        border-left: 1.2mm solid var(--neon-yellow);
       }
 
       @media print {
