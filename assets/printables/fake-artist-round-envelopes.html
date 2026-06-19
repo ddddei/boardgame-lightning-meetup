@@ -1,405 +1,696 @@
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>가짜예술가 라운드 봉투 카드</title>
-    <style>
-      @page {
-        size: A4;
-        margin: 10mm;
-      }
+<!doctype html><html lang="ko"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>가짜예술가 라운드 봉투 카드</title><style>
 
-      :root {
-        --paper: #ffffff;
-        --ink: #111827;
-        --muted: #374151;
-        --line: #1f2937;
-        --soft-line: #6b7280;
-        --accent: #0f2a44;
-        --shade: #f3f4f6;
-        --neon-pink: #ff2fb3;
-        --neon-blue: #00b7ff;
-        --neon-yellow: #ffd43b;
-        --neon-green: #39ff8a;
-        --header-ink: #07111f;
-        --card-accent: var(--neon-blue);
-        --space-1: 1.2mm;
-        --space-2: 2mm;
-        --space-3: 3mm;
-        --space-4: 4.5mm;
-      }
+@page { size: A4; margin: 10mm; }
+:root {
+  --paper:#fffdf8; --card:#ffffff; --ink:#111827; --muted:#586174;
+  --line:#202838; --soft:#d5dce8; --soft2:#eef2f7;
+  --navy:#0b1020; --pink:#ff3aae; --blue:#0bb8ff; --yellow:#ffd84d; --green:#41e682;
+  --purple:#9d5cff;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Nanum Gothic", system-ui, sans-serif; line-height:1.32; word-break:keep-all; overflow-wrap:break-word;
+}
+.page, .round-page { width:190mm; min-height:277mm; margin:0 auto; }
+.round-page { break-after:page; page-break-after:always; }
+.round-page:last-child { break-after:auto; page-break-after:auto; }
+.topbar {
+  display:grid; grid-template-columns:1fr auto; gap:8mm; align-items:center;
+  margin-bottom:4mm; padding:4mm 5mm; background:var(--navy); color:white;
+  border-radius:5mm; position:relative; overflow:hidden;
+}
+.topbar::before {
+  content:""; position:absolute; left:5mm; right:5mm; top:3mm; height:1.2mm;
+  background:linear-gradient(90deg,var(--pink) 0 18%,transparent 18% 26%,var(--yellow) 26% 45%,transparent 45% 55%,var(--blue) 55% 74%,transparent 74% 82%,var(--green) 82%);
+}
+.eyebrow { margin:3mm 0 1mm; color:#d4d8e4; font-size:8.2pt; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+h1 { margin:0; font-size:21pt; line-height:1.08; letter-spacing:-.04em; color:white; }
+.subtitle { margin:1.5mm 0 0; font-size:9.2pt; color:#dce3f1; font-weight:700; }
+.badge {
+  border:1.4pt solid var(--pink); border-radius:3mm; padding:2mm 4mm; 
+  font-size:12pt; font-weight:900; white-space:nowrap; box-shadow:inset 0 0 0 1pt rgba(255,255,255,.08);
+}
+.helper {
+  display:grid; grid-template-columns:23mm 1fr 30mm; margin-bottom:4mm;
+  border:1pt solid var(--soft); border-radius:2mm; overflow:hidden; background:white;
+}
+.helper span { padding:1.5mm 2mm; font-size:8.4pt; font-weight:800; border-right:1pt solid var(--soft); }
+.helper span:last-child { border-right:0; }
+.helper .key { color:var(--navy); background:#f6f8fb; }
+.cut { border:1.4pt dashed var(--line); }
+.inner {
+  background:var(--card); border:1pt solid var(--soft); border-radius:2mm; overflow:hidden;
+}
+.neon-strip { height:2.4mm; background:var(--blue); }
+.meta { display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:7.8pt; font-weight:900; letter-spacing:.04em; }
+.role { margin:0; text-align:center; font-size:15.5pt; font-weight:900; color:var(--navy); letter-spacing:-.04em; }
+.fake .role { color:var(--pink); }
+.field { display:grid; grid-template-columns:22mm 1fr; gap:2mm; align-items:center; }
+.label {
+  padding:1mm 1.5mm; border:1pt solid var(--soft); border-left:1.2mm solid var(--accent,var(--blue));
+  background:#f9fbff; font-size:8.8pt; font-weight:900; text-align:center;
+}
+.value, .blank {
+  min-height:7.5mm; border-bottom:1.5pt solid var(--line); font-size:15pt; font-weight:900;
+  text-align:center; line-height:1.05;
+}
+.note { margin:0; padding-top:1mm; border-top:1pt dotted var(--soft); color:var(--muted); font-size:7.2pt; text-align:center; font-weight:700; }
+@media print {
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page,.round-page { width:auto; min-height:auto; }
+}
 
-      * {
-        box-sizing: border-box;
-      }
+.cards { display:grid; grid-template-columns:repeat(2,1fr); gap:3mm; }
+.card { height:55mm; padding:2mm; --accent:var(--blue); }
+.card.fake { border-color:var(--pink); }
+.inner { height:100%; }
+.card-body { height:calc(100% - 2.4mm); padding:2mm 3mm; display:flex; flex-direction:column; justify-content:space-between; }
+.fake .inner { border-color:var(--pink); }
+.fake .neon-strip { background:linear-gradient(90deg,var(--pink),var(--purple)); }
+.fields { display:grid; gap:2mm; }
+.value { color:var(--ink); }
+.instruction { margin-bottom:3mm; }
 
-      body {
-        margin: 0;
-        color: var(--ink);
-        background: var(--paper);
-        font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
-        line-height: 1.28;
-        word-break: keep-all;
-        overflow-wrap: break-word;
-      }
-
-      .round-page {
-        width: 190mm;
-        min-height: 277mm;
-        margin: 0 auto;
-        break-after: page;
-        page-break-after: always;
-      }
-
-      .round-page:last-child {
-        break-after: auto;
-        page-break-after: auto;
-      }
-
-      header {
-        position: relative;
-        display: grid;
-        grid-template-columns: 1fr 49mm;
-        gap: var(--space-4);
-        align-items: end;
-        border: 1pt solid var(--line);
-        border-bottom-width: 2pt;
-        background: var(--header-ink);
-        padding-bottom: var(--space-2);
-        padding: var(--space-3);
-        margin-bottom: var(--space-3);
-      }
-
-      header::before,
-      header::after {
-        content: "";
-        position: absolute;
-        left: var(--space-3);
-        right: var(--space-3);
-        height: 0.8mm;
-        pointer-events: none;
-      }
-
-      header::before {
-        top: var(--space-1);
-        background: linear-gradient(90deg, var(--neon-blue), var(--neon-yellow) 45%, var(--neon-pink));
-      }
-
-      header::after {
-        bottom: var(--space-1);
-        border-top: 0.45mm solid var(--neon-green);
-        border-bottom: 0.45mm solid var(--neon-pink);
-      }
-
-      .brand {
-        margin: 0 0 var(--space-1);
-        color: var(--neon-yellow);
-        font-size: 8.2pt;
-        font-weight: 900;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
-
-      h1 {
-        margin: 0 0 var(--space-1);
-        color: var(--paper);
-        font-size: 18.5pt;
-        line-height: 1.05;
-      }
-
-      .notice {
-        margin: 0;
-        color: var(--paper);
-        font-size: 8.8pt;
-        font-weight: 800;
-      }
-
-      .round-stamp {
-        border: 1.6pt solid var(--neon-blue);
-        border-left: 3mm solid var(--neon-pink);
-        background: var(--paper);
-        padding: var(--space-2);
-        color: var(--accent);
-        text-align: center;
-        font-weight: 900;
-      }
-
-      .round-stamp strong {
-        display: block;
-        margin-bottom: var(--space-1);
-        border-bottom: 1pt solid var(--neon-green);
-        padding-bottom: var(--space-1);
-        color: var(--line);
-        font-size: 17pt;
-      }
-
-      .instruction {
-        display: grid;
-        grid-template-columns: 22mm 1fr 30mm;
-        border: 1pt solid var(--line);
-        border-left: 2mm solid var(--neon-yellow);
-        margin-bottom: var(--space-3);
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-
-      .instruction span {
-        padding: var(--space-1) var(--space-2);
-        border-right: 1pt solid var(--soft-line);
-        font-size: 8.6pt;
-        font-weight: 900;
-      }
-
-      .instruction span:last-child {
-        border-right: 0;
-      }
-
-      .instruction .label {
-        background: linear-gradient(90deg, var(--neon-yellow), var(--shade));
-        color: var(--accent);
-        text-align: center;
-      }
-
-      .cards {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-3);
-      }
-
-      .card {
-        --card-accent: var(--neon-blue);
-        height: 55mm;
-        border: 1.6pt dashed var(--line);
-        padding: var(--space-2);
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-
-      .card:nth-child(3n + 2) {
-        --card-accent: var(--neon-yellow);
-      }
-
-      .card:nth-child(3n) {
-        --card-accent: var(--neon-green);
-      }
-
-      .card:nth-child(8) {
-        --card-accent: var(--neon-pink);
-      }
-
-      .safe-zone {
-        position: relative;
-        height: 100%;
-        border: 1pt solid var(--soft-line);
-        padding: var(--space-2);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-
-      .safe-zone::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-top: 3.5mm solid var(--card-accent);
-        pointer-events: none;
-      }
-
-      .card-meta {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        justify-content: space-between;
-        gap: var(--space-2);
-        color: var(--line);
-        font-size: 8pt;
-        font-weight: 900;
-        letter-spacing: 0.03em;
-      }
-
-      .role {
-        margin: 0;
-        border-top: 1pt solid var(--line);
-        border-bottom: 1pt solid var(--card-accent);
-        padding: var(--space-1) 0;
-        color: var(--accent);
-        font-size: 14.5pt;
-        font-weight: 900;
-        text-align: center;
-      }
-
-      .fields {
-        display: grid;
-        gap: var(--space-2);
-      }
-
-      .field {
-        display: grid;
-        grid-template-columns: 22mm 1fr;
-        gap: var(--space-2);
-        align-items: center;
-      }
-
-      .field-label {
-        border: 1pt solid var(--line);
-        border-left: 1.2mm solid var(--card-accent);
-        padding: 0.8mm var(--space-1);
-        color: var(--accent);
-        font-size: 9.8pt;
-        font-weight: 900;
-        text-align: center;
-      }
-
-      .field-value {
-        min-height: 8mm;
-        border-bottom: 1.4pt solid var(--line);
-        box-shadow: inset 0 -0.7mm 0 var(--card-accent);
-        color: var(--ink);
-        font-size: 16pt;
-        font-weight: 900;
-        line-height: 1;
-        text-align: center;
-      }
-
-      .x-value {
-        letter-spacing: 2pt;
-      }
-
-      .fold-note {
-        margin: 0;
-        border-top: 1pt dotted var(--soft-line);
-        padding-top: var(--space-1);
-        color: var(--muted);
-        font-size: 7.8pt;
-        font-weight: 800;
-        text-align: center;
-      }
-
-      @media print {
-        body {
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
-        }
-
-        .round-page {
-          width: auto;
-          min-height: auto;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <section class="round-page" aria-label="가짜예술가 1라운드 카드">
-        <header>
-          <div>
-            <p class="brand">Boardgame Lightning Meetup · Round Envelope</p>
-            <h1>가짜예술가 라운드 봉투 카드</h1>
-            <p class="notice">이 페이지의 8장을 모두 자르고 접어 같은 봉투에 넣습니다. 배부 전에는 섞어서 내용이 보이지 않게 둡니다.</p>
-          </div>
-          <div class="round-stamp"><strong>ROUND 1</strong>7 answer + X</div>
-        </header>
-        <div class="instruction"><span class="label">봉투 라벨</span><span>1라운드 카드 8장</span><span>자르기 · 접기 · 섞기</span></div>
-        <div class="cards">
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 1</span><span>CARD 01</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">동물</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">고양이</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 1</span><span>CARD 02</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">동물</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">고양이</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 1</span><span>CARD 03</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">동물</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">고양이</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 1</span><span>CARD 04</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">동물</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">고양이</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 1</span><span>CARD 05</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">동물</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">고양이</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 1</span><span>CARD 06</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">동물</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">고양이</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 1</span><span>CARD 07</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">동물</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">고양이</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 1</span><span>CARD 08</span></div><p class="role">가짜예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">동물</span></div><div class="field"><span class="field-label">정답</span><span class="field-value x-value">X</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-        </div>
-      </section>
-
-      <section class="round-page" aria-label="가짜예술가 2라운드 카드">
-        <header>
-          <div>
-            <p class="brand">Boardgame Lightning Meetup · Round Envelope</p>
-            <h1>가짜예술가 라운드 봉투 카드</h1>
-            <p class="notice">이 페이지의 8장을 모두 자르고 접어 같은 봉투에 넣습니다. 배부 전에는 섞어서 내용이 보이지 않게 둡니다.</p>
-          </div>
-          <div class="round-stamp"><strong>ROUND 2</strong>7 answer + X</div>
-        </header>
-        <div class="instruction"><span class="label">봉투 라벨</span><span>2라운드 카드 8장</span><span>자르기 · 접기 · 섞기</span></div>
-        <div class="cards">
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 2</span><span>CARD 01</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">과일</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">사과</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 2</span><span>CARD 02</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">과일</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">사과</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 2</span><span>CARD 03</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">과일</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">사과</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 2</span><span>CARD 04</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">과일</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">사과</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 2</span><span>CARD 05</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">과일</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">사과</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 2</span><span>CARD 06</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">과일</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">사과</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 2</span><span>CARD 07</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">과일</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">사과</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 2</span><span>CARD 08</span></div><p class="role">가짜예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">과일</span></div><div class="field"><span class="field-label">정답</span><span class="field-value x-value">X</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-        </div>
-      </section>
-
-      <section class="round-page" aria-label="가짜예술가 3라운드 카드">
-        <header>
-          <div>
-            <p class="brand">Boardgame Lightning Meetup · Round Envelope</p>
-            <h1>가짜예술가 라운드 봉투 카드</h1>
-            <p class="notice">이 페이지의 8장을 모두 자르고 접어 같은 봉투에 넣습니다. 배부 전에는 섞어서 내용이 보이지 않게 둡니다.</p>
-          </div>
-          <div class="round-stamp"><strong>ROUND 3</strong>7 answer + X</div>
-        </header>
-        <div class="instruction"><span class="label">봉투 라벨</span><span>3라운드 카드 8장</span><span>자르기 · 접기 · 섞기</span></div>
-        <div class="cards">
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 3</span><span>CARD 01</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">장소</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">바다</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 3</span><span>CARD 02</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">장소</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">바다</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 3</span><span>CARD 03</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">장소</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">바다</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 3</span><span>CARD 04</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">장소</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">바다</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 3</span><span>CARD 05</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">장소</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">바다</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 3</span><span>CARD 06</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">장소</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">바다</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 3</span><span>CARD 07</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">장소</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">바다</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 3</span><span>CARD 08</span></div><p class="role">가짜예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">장소</span></div><div class="field"><span class="field-label">정답</span><span class="field-value x-value">X</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-        </div>
-      </section>
-
-      <section class="round-page" aria-label="가짜예술가 4라운드 카드">
-        <header>
-          <div>
-            <p class="brand">Boardgame Lightning Meetup · Round Envelope</p>
-            <h1>가짜예술가 라운드 봉투 카드</h1>
-            <p class="notice">이 페이지의 8장을 모두 자르고 접어 같은 봉투에 넣습니다. 배부 전에는 섞어서 내용이 보이지 않게 둡니다.</p>
-          </div>
-          <div class="round-stamp"><strong>ROUND 4</strong>7 answer + X</div>
-        </header>
-        <div class="instruction"><span class="label">봉투 라벨</span><span>4라운드 카드 8장</span><span>자르기 · 접기 · 섞기</span></div>
-        <div class="cards">
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 4</span><span>CARD 01</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">물건</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">우산</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 4</span><span>CARD 02</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">물건</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">우산</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 4</span><span>CARD 03</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">물건</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">우산</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 4</span><span>CARD 04</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">물건</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">우산</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 4</span><span>CARD 05</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">물건</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">우산</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 4</span><span>CARD 06</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">물건</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">우산</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 4</span><span>CARD 07</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">물건</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">우산</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 4</span><span>CARD 08</span></div><p class="role">가짜예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">물건</span></div><div class="field"><span class="field-label">정답</span><span class="field-value x-value">X</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-        </div>
-      </section>
-
-      <section class="round-page" aria-label="가짜예술가 5라운드 카드">
-        <header>
-          <div>
-            <p class="brand">Boardgame Lightning Meetup · Round Envelope</p>
-            <h1>가짜예술가 라운드 봉투 카드</h1>
-            <p class="notice">이 페이지의 8장을 모두 자르고 접어 같은 봉투에 넣습니다. 배부 전에는 섞어서 내용이 보이지 않게 둡니다.</p>
-          </div>
-          <div class="round-stamp"><strong>ROUND 5</strong>7 answer + X</div>
-        </header>
-        <div class="instruction"><span class="label">봉투 라벨</span><span>5라운드 카드 8장</span><span>자르기 · 접기 · 섞기</span></div>
-        <div class="cards">
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 5</span><span>CARD 01</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">탈것</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">버스</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 5</span><span>CARD 02</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">탈것</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">버스</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 5</span><span>CARD 03</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">탈것</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">버스</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 5</span><span>CARD 04</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">탈것</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">버스</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 5</span><span>CARD 05</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">탈것</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">버스</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 5</span><span>CARD 06</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">탈것</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">버스</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 5</span><span>CARD 07</span></div><p class="role">예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">탈것</span></div><div class="field"><span class="field-label">정답</span><span class="field-value">버스</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-          <article class="card"><div class="safe-zone"><div class="card-meta"><span>ROUND 5</span><span>CARD 08</span></div><p class="role">가짜예술가</p><div class="fields"><div class="field"><span class="field-label">카테고리</span><span class="field-value">탈것</span></div><div class="field"><span class="field-label">정답</span><span class="field-value x-value">X</span></div></div><p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p></div></article>
-        </div>
-      </section>
-    </main>
-  </body>
-</html>
+</style></head><body><main>
+<section class="round-page" aria-label="가짜예술가 1라운드 카드">
+<header class="topbar">
+  <div>
+    <p class="eyebrow">Boardgame Lightning Meetup</p>
+    <h1>가짜예술가 라운드 봉투 카드</h1>
+    <p class="subtitle">8장을 자르고 접어 같은 봉투에 넣습니다. 배부 전 섞어주세요.</p>
+  </div>
+  <div class="badge">ROUND 1 · 7 + X</div>
+</header>
+<div class="helper"><span class="key">봉투 라벨</span><span>1라운드 카드 8장</span><span>자르기 · 접기 · 섞기</span></div>
+<div class="cards">
+<article class="card cut" style="--accent:var(--blue)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 1</span><span>CARD 01</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">동물</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">고양이</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--yellow)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 1</span><span>CARD 02</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">동물</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">고양이</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--green)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 1</span><span>CARD 03</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">동물</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">고양이</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--purple)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 1</span><span>CARD 04</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">동물</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">고양이</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--pink)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 1</span><span>CARD 05</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">동물</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">고양이</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--blue)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 1</span><span>CARD 06</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">동물</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">고양이</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--yellow)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 1</span><span>CARD 07</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">동물</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">고양이</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut fake" style="--accent:var(--pink)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 1</span><span>CARD 08</span></div>
+      <p class="role">가짜예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">동물</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">X</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+</div></section>
+<section class="round-page" aria-label="가짜예술가 2라운드 카드">
+<header class="topbar">
+  <div>
+    <p class="eyebrow">Boardgame Lightning Meetup</p>
+    <h1>가짜예술가 라운드 봉투 카드</h1>
+    <p class="subtitle">8장을 자르고 접어 같은 봉투에 넣습니다. 배부 전 섞어주세요.</p>
+  </div>
+  <div class="badge">ROUND 2 · 7 + X</div>
+</header>
+<div class="helper"><span class="key">봉투 라벨</span><span>2라운드 카드 8장</span><span>자르기 · 접기 · 섞기</span></div>
+<div class="cards">
+<article class="card cut" style="--accent:var(--blue)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 2</span><span>CARD 01</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">과일</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">사과</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--yellow)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 2</span><span>CARD 02</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">과일</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">사과</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--green)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 2</span><span>CARD 03</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">과일</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">사과</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--purple)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 2</span><span>CARD 04</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">과일</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">사과</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--pink)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 2</span><span>CARD 05</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">과일</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">사과</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--blue)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 2</span><span>CARD 06</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">과일</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">사과</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--yellow)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 2</span><span>CARD 07</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">과일</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">사과</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut fake" style="--accent:var(--pink)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 2</span><span>CARD 08</span></div>
+      <p class="role">가짜예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">과일</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">X</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+</div></section>
+<section class="round-page" aria-label="가짜예술가 3라운드 카드">
+<header class="topbar">
+  <div>
+    <p class="eyebrow">Boardgame Lightning Meetup</p>
+    <h1>가짜예술가 라운드 봉투 카드</h1>
+    <p class="subtitle">8장을 자르고 접어 같은 봉투에 넣습니다. 배부 전 섞어주세요.</p>
+  </div>
+  <div class="badge">ROUND 3 · 7 + X</div>
+</header>
+<div class="helper"><span class="key">봉투 라벨</span><span>3라운드 카드 8장</span><span>자르기 · 접기 · 섞기</span></div>
+<div class="cards">
+<article class="card cut" style="--accent:var(--blue)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 3</span><span>CARD 01</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">장소</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">바다</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--yellow)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 3</span><span>CARD 02</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">장소</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">바다</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--green)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 3</span><span>CARD 03</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">장소</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">바다</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--purple)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 3</span><span>CARD 04</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">장소</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">바다</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--pink)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 3</span><span>CARD 05</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">장소</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">바다</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--blue)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 3</span><span>CARD 06</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">장소</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">바다</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--yellow)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 3</span><span>CARD 07</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">장소</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">바다</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut fake" style="--accent:var(--pink)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 3</span><span>CARD 08</span></div>
+      <p class="role">가짜예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">장소</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">X</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+</div></section>
+<section class="round-page" aria-label="가짜예술가 4라운드 카드">
+<header class="topbar">
+  <div>
+    <p class="eyebrow">Boardgame Lightning Meetup</p>
+    <h1>가짜예술가 라운드 봉투 카드</h1>
+    <p class="subtitle">8장을 자르고 접어 같은 봉투에 넣습니다. 배부 전 섞어주세요.</p>
+  </div>
+  <div class="badge">ROUND 4 · 7 + X</div>
+</header>
+<div class="helper"><span class="key">봉투 라벨</span><span>4라운드 카드 8장</span><span>자르기 · 접기 · 섞기</span></div>
+<div class="cards">
+<article class="card cut" style="--accent:var(--blue)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 4</span><span>CARD 01</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">물건</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">우산</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--yellow)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 4</span><span>CARD 02</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">물건</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">우산</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--green)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 4</span><span>CARD 03</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">물건</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">우산</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--purple)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 4</span><span>CARD 04</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">물건</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">우산</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--pink)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 4</span><span>CARD 05</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">물건</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">우산</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--blue)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 4</span><span>CARD 06</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">물건</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">우산</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--yellow)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 4</span><span>CARD 07</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">물건</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">우산</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut fake" style="--accent:var(--pink)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 4</span><span>CARD 08</span></div>
+      <p class="role">가짜예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">물건</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">X</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+</div></section>
+<section class="round-page" aria-label="가짜예술가 5라운드 카드">
+<header class="topbar">
+  <div>
+    <p class="eyebrow">Boardgame Lightning Meetup</p>
+    <h1>가짜예술가 라운드 봉투 카드</h1>
+    <p class="subtitle">8장을 자르고 접어 같은 봉투에 넣습니다. 배부 전 섞어주세요.</p>
+  </div>
+  <div class="badge">ROUND 5 · 7 + X</div>
+</header>
+<div class="helper"><span class="key">봉투 라벨</span><span>5라운드 카드 8장</span><span>자르기 · 접기 · 섞기</span></div>
+<div class="cards">
+<article class="card cut" style="--accent:var(--blue)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 5</span><span>CARD 01</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">탈것</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">버스</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--yellow)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 5</span><span>CARD 02</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">탈것</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">버스</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--green)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 5</span><span>CARD 03</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">탈것</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">버스</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--purple)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 5</span><span>CARD 04</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">탈것</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">버스</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--pink)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 5</span><span>CARD 05</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">탈것</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">버스</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--blue)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 5</span><span>CARD 06</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">탈것</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">버스</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut" style="--accent:var(--yellow)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 5</span><span>CARD 07</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">탈것</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">버스</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+<article class="card cut fake" style="--accent:var(--pink)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>ROUND 5</span><span>CARD 08</span></div>
+      <p class="role">가짜예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="value">탈것</span></div>
+        <div class="field"><span class="label">정답</span><span class="value">X</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+</div></section>
+</main></body></html>

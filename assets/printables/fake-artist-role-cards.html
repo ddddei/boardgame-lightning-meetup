@@ -1,383 +1,188 @@
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>가짜예술가 역할 카드</title>
-    <style>
-      @page {
-        size: A4;
-        margin: 12mm;
-      }
+<!doctype html><html lang="ko"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>가짜예술가 역할 카드</title><style>
+@page { size: A4; margin: 10mm; }
+:root {
+  --paper:#fffdf8; --card:#ffffff; --ink:#111827; --muted:#586174;
+  --line:#202838; --soft:#d5dce8; --soft2:#eef2f7;
+  --navy:#0b1020; --pink:#ff3aae; --blue:#0bb8ff; --yellow:#ffd84d; --green:#41e682;
+  --purple:#9d5cff;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Nanum Gothic", system-ui, sans-serif; line-height:1.32; word-break:keep-all; overflow-wrap:break-word;
+}
+.page, .round-page { width:190mm; min-height:277mm; margin:0 auto; }
+.round-page { break-after:page; page-break-after:always; }
+.round-page:last-child { break-after:auto; page-break-after:auto; }
+.topbar {
+  display:grid; grid-template-columns:1fr auto; gap:8mm; align-items:center;
+  margin-bottom:4mm; padding:4mm 5mm; background:var(--navy); color:white;
+  border-radius:5mm; position:relative; overflow:hidden;
+}
+.topbar::before {
+  content:""; position:absolute; left:5mm; right:5mm; top:3mm; height:1.2mm;
+  background:linear-gradient(90deg,var(--pink) 0 18%,transparent 18% 26%,var(--yellow) 26% 45%,transparent 45% 55%,var(--blue) 55% 74%,transparent 74% 82%,var(--green) 82%);
+}
+.eyebrow { margin:3mm 0 1mm; color:#d4d8e4; font-size:8.2pt; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+h1 { margin:0; font-size:21pt; line-height:1.08; letter-spacing:-.04em; color:white; }
+.subtitle { margin:1.5mm 0 0; font-size:9.2pt; color:#dce3f1; font-weight:700; }
+.badge {
+  border:1.4pt solid var(--pink); border-radius:3mm; padding:2mm 4mm; 
+  font-size:12pt; font-weight:900; white-space:nowrap; box-shadow:inset 0 0 0 1pt rgba(255,255,255,.08);
+}
+.helper {
+  display:grid; grid-template-columns:23mm 1fr 30mm; margin-bottom:4mm;
+  border:1pt solid var(--soft); border-radius:2mm; overflow:hidden; background:white;
+}
+.helper span { padding:1.5mm 2mm; font-size:8.4pt; font-weight:800; border-right:1pt solid var(--soft); }
+.helper span:last-child { border-right:0; }
+.helper .key { color:var(--navy); background:#f6f8fb; }
+.cut { border:1.4pt dashed var(--line); }
+.inner {
+  background:var(--card); border:1pt solid var(--soft); border-radius:2mm; overflow:hidden;
+}
+.neon-strip { height:2.4mm; background:var(--blue); }
+.meta { display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:7.8pt; font-weight:900; letter-spacing:.04em; }
+.role { margin:0; text-align:center; font-size:15.5pt; font-weight:900; color:var(--navy); letter-spacing:-.04em; }
+.fake .role { color:var(--pink); }
+.field { display:grid; grid-template-columns:22mm 1fr; gap:2mm; align-items:center; }
+.label {
+  padding:1mm 1.5mm; border:1pt solid var(--soft); border-left:1.2mm solid var(--accent,var(--blue));
+  background:#f9fbff; font-size:8.8pt; font-weight:900; text-align:center;
+}
+.value, .blank {
+  min-height:7.5mm; border-bottom:1.5pt solid var(--line); font-size:15pt; font-weight:900;
+  text-align:center; line-height:1.05;
+}
+.note { margin:0; padding-top:1mm; border-top:1pt dotted var(--soft); color:var(--muted); font-size:7.2pt; text-align:center; font-weight:700; }
+@media print {
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page,.round-page { width:auto; min-height:auto; }
+}
 
-      :root {
-        --paper: #ffffff;
-        --ink: #111827;
-        --muted: #374151;
-        --line: #1f2937;
-        --soft-line: #6b7280;
-        --accent: #0f2a44;
-        --shade: #f3f4f6;
-        --neon-pink: #ff2fb3;
-        --neon-blue: #00b7ff;
-        --neon-yellow: #ffd43b;
-        --neon-green: #39ff8a;
-        --card-accent: var(--neon-blue);
-        --space-1: 1.5mm;
-        --space-2: 2.5mm;
-        --space-3: 4mm;
-        --space-4: 6mm;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        color: var(--ink);
-        background: var(--paper);
-        font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
-        line-height: 1.32;
-        word-break: keep-all;
-        overflow-wrap: break-word;
-      }
-
-      .page {
-        width: 186mm;
-        min-height: 273mm;
-        margin: 0 auto;
-      }
-
-      header {
-        display: grid;
-        grid-template-columns: 1fr 43mm;
-        gap: var(--space-3);
-        align-items: end;
-        border-top: 2.2mm solid var(--accent);
-        border-bottom: 1pt solid var(--line);
-        box-shadow: inset 0 0.8mm 0 var(--neon-blue), inset 0 1.6mm 0 var(--neon-yellow);
-        padding-bottom: var(--space-1);
-        padding-top: var(--space-2);
-        margin-bottom: var(--space-2);
-      }
-
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-1);
-        margin-bottom: var(--space-1);
-        color: var(--muted);
-        font-size: 8.6pt;
-        font-weight: 900;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
-
-      .brand::before,
-      .brand::after {
-        content: "";
-        display: inline-block;
-        width: 5mm;
-        height: 1.5mm;
-        border-top: 1pt solid var(--neon-blue);
-        border-bottom: 1pt solid var(--neon-green);
-      }
-
-      h1 {
-        margin: 0 0 var(--space-1);
-        color: var(--accent);
-        font-size: 20pt;
-        line-height: 1.05;
-      }
-
-      .notice {
-        margin: 0;
-        color: var(--muted);
-        font-size: 9.6pt;
-        font-weight: 800;
-      }
-
-      .count {
-        border: 1.5pt solid var(--line);
-        border-left: 2mm solid var(--neon-pink);
-        background: var(--shade);
-        padding: var(--space-2);
-        color: var(--accent);
-        font-size: 10pt;
-        font-weight: 900;
-        text-align: center;
-      }
-
-      .count strong {
-        display: block;
-        margin-bottom: var(--space-1);
-        border-bottom: 1pt solid var(--neon-blue);
-        padding-bottom: var(--space-1);
-        font-size: 13pt;
-      }
-
-      .cards {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-3);
-      }
-
-      .card {
-        --card-accent: var(--neon-blue);
-        height: 54.2mm;
-        border: 1.6pt dashed var(--line);
-        padding: var(--space-2);
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-
-      .card:nth-child(3n + 2) {
-        --card-accent: var(--neon-yellow);
-      }
-
-      .card:nth-child(3n) {
-        --card-accent: var(--neon-green);
-      }
-
-      .card:nth-child(8) {
-        --card-accent: var(--neon-pink);
-      }
-
-      .safe-zone {
-        position: relative;
-        height: 100%;
-        border: 1pt solid var(--soft-line);
-        padding: 1.8mm;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-
-      .safe-zone::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-top: 3.2mm solid var(--accent);
-        box-shadow: inset 0 1mm 0 var(--card-accent);
-        pointer-events: none;
-      }
-
-      .card-meta {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        justify-content: space-between;
-        gap: var(--space-2);
-        color: var(--line);
-        font-size: 8.6pt;
-        font-weight: 900;
-        letter-spacing: 0.03em;
-      }
-
-      .card-number {
-        border: 1pt solid var(--line);
-        border-left: 1.2mm solid var(--card-accent);
-        padding: 0 1.2mm;
-        color: var(--accent);
-      }
-
-      .role {
-        position: relative;
-        margin: var(--space-1) 0 0;
-        border-top: 1pt solid var(--line);
-        border-bottom: 1pt solid var(--card-accent);
-        padding: var(--space-1) 0;
-        color: var(--accent);
-        font-size: 14.8pt;
-        font-weight: 900;
-        text-align: center;
-      }
-
-      .role::before,
-      .role::after {
-        content: "✦";
-        color: var(--card-accent);
-        font-size: 8pt;
-        vertical-align: middle;
-      }
-
-      .role::before {
-        margin-right: var(--space-2);
-      }
-
-      .role::after {
-        margin-left: var(--space-2);
-      }
-
-      .fields {
-        display: grid;
-        gap: var(--space-2);
-      }
-
-      .field {
-        display: grid;
-        grid-template-columns: 24mm 1fr;
-        gap: var(--space-2);
-        align-items: end;
-        font-size: 10.8pt;
-        font-weight: 900;
-      }
-
-      .label {
-        border: 1pt solid var(--line);
-        border-left: 1.2mm solid var(--card-accent);
-        padding: 0.8mm var(--space-1);
-        color: var(--ink);
-        text-align: center;
-      }
-
-      .line {
-        min-height: 7mm;
-        border-bottom: 1.4pt solid var(--line);
-        box-shadow: inset 0 -0.6mm 0 var(--card-accent);
-        text-align: center;
-        font-size: 18pt;
-        font-weight: 900;
-        line-height: 1;
-      }
-
-      .x-value {
-        color: var(--ink);
-        letter-spacing: 2pt;
-      }
-
-      .fold-note {
-        margin: 0;
-        border-top: 1pt dotted var(--soft-line);
-        padding-top: var(--space-1);
-        color: var(--muted);
-        font-size: 8.1pt;
-        font-weight: 800;
-        text-align: center;
-      }
-
-      @media print {
-        body {
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
-        }
-
-        .page {
-          width: auto;
-          min-height: auto;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main class="page">
-      <header>
-        <div>
-          <div class="brand">Boardgame Lightning Meetup</div>
-          <h1>가짜예술가 라운드 키트</h1>
-          <p class="notice">접어 섞은 뒤 진행자 포함 8명에게 1장씩 배부합니다. 진행자도 자기 카드만 봅니다.</p>
-        </div>
-        <div class="count"><strong>8 Cards</strong>예술가 7장<br />X 1장</div>
-      </header>
-
-      <section class="cards" aria-label="가짜예술가 역할 카드 8장">
-        <article class="card">
-          <div class="safe-zone">
-            <div class="card-meta"><span class="card-number">CARD 01</span><span>ROLE</span></div>
-            <p class="role">예술가</p>
-            <div class="fields">
-              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
-              <div class="field"><span class="label">정답</span><span class="line"></span></div>
-            </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="safe-zone">
-            <div class="card-meta"><span class="card-number">CARD 02</span><span>ROLE</span></div>
-            <p class="role">예술가</p>
-            <div class="fields">
-              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
-              <div class="field"><span class="label">정답</span><span class="line"></span></div>
-            </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="safe-zone">
-            <div class="card-meta"><span class="card-number">CARD 03</span><span>ROLE</span></div>
-            <p class="role">예술가</p>
-            <div class="fields">
-              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
-              <div class="field"><span class="label">정답</span><span class="line"></span></div>
-            </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="safe-zone">
-            <div class="card-meta"><span class="card-number">CARD 04</span><span>ROLE</span></div>
-            <p class="role">예술가</p>
-            <div class="fields">
-              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
-              <div class="field"><span class="label">정답</span><span class="line"></span></div>
-            </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="safe-zone">
-            <div class="card-meta"><span class="card-number">CARD 05</span><span>ROLE</span></div>
-            <p class="role">예술가</p>
-            <div class="fields">
-              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
-              <div class="field"><span class="label">정답</span><span class="line"></span></div>
-            </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="safe-zone">
-            <div class="card-meta"><span class="card-number">CARD 06</span><span>ROLE</span></div>
-            <p class="role">예술가</p>
-            <div class="fields">
-              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
-              <div class="field"><span class="label">정답</span><span class="line"></span></div>
-            </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="safe-zone">
-            <div class="card-meta"><span class="card-number">CARD 07</span><span>ROLE</span></div>
-            <p class="role">예술가</p>
-            <div class="fields">
-              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
-              <div class="field"><span class="label">정답</span><span class="line"></span></div>
-            </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="safe-zone">
-            <div class="card-meta"><span class="card-number">CARD 08</span><span>ROLE</span></div>
-            <p class="role">가짜예술가</p>
-            <div class="fields">
-              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
-              <div class="field"><span class="label">정답</span><span class="line x-value">X</span></div>
-            </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
-          </div>
-        </article>
-      </section>
-    </main>
-  </body>
-</html>
+.cards { display:grid; grid-template-columns:repeat(2,1fr); gap:4mm; }
+.card { height:55mm; padding:2mm; --accent:var(--blue); }
+.card.fake { border-color:var(--pink); }
+.inner { height:100%; }
+.card-body { height:calc(100% - 2.4mm); padding:2mm 3mm; display:flex; flex-direction:column; justify-content:space-between; }
+.fake .inner { border-color:var(--pink); }
+.fake .neon-strip { background:linear-gradient(90deg,var(--pink),var(--purple)); }
+.fields { display:grid; gap:2mm; }
+.value { color:var(--ink); }
+.instruction { margin-bottom:3mm; }
+</style></head><body><main class="page">
+<header class="topbar">
+  <div>
+    <p class="eyebrow">Boardgame Lightning Meetup</p>
+    <h1>가짜예술가 역할 카드</h1>
+    <p class="subtitle">빈칸형 카드입니다. 카테고리와 정답을 적은 뒤 접어 섞어 배부합니다.</p>
+  </div>
+  <div class="badge">8 CARDS</div>
+</header>
+<section class="cards" aria-label="가짜예술가 역할 카드 8장">
+<article class="card cut" style="--accent:var(--blue)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>CARD 01</span><span>ROLE</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="blank"></span></div>
+        <div class="field"><span class="label">정답</span><span class="blank"></span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article><article class="card cut" style="--accent:var(--yellow)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>CARD 02</span><span>ROLE</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="blank"></span></div>
+        <div class="field"><span class="label">정답</span><span class="blank"></span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article><article class="card cut" style="--accent:var(--green)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>CARD 03</span><span>ROLE</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="blank"></span></div>
+        <div class="field"><span class="label">정답</span><span class="blank"></span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article><article class="card cut" style="--accent:var(--purple)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>CARD 04</span><span>ROLE</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="blank"></span></div>
+        <div class="field"><span class="label">정답</span><span class="blank"></span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article><article class="card cut" style="--accent:var(--blue)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>CARD 05</span><span>ROLE</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="blank"></span></div>
+        <div class="field"><span class="label">정답</span><span class="blank"></span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article><article class="card cut" style="--accent:var(--yellow)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>CARD 06</span><span>ROLE</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="blank"></span></div>
+        <div class="field"><span class="label">정답</span><span class="blank"></span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article><article class="card cut" style="--accent:var(--green)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>CARD 07</span><span>ROLE</span></div>
+      <p class="role">예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="blank"></span></div>
+        <div class="field"><span class="label">정답</span><span class="blank"></span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article><article class="card cut fake" style="--accent:var(--pink)">
+  <div class="inner">
+    <div class="neon-strip"></div>
+    <div class="card-body">
+      <div class="meta"><span>CARD 08</span><span>ROLE</span></div>
+      <p class="role">가짜예술가</p>
+      <div class="fields">
+        <div class="field"><span class="label">카테고리</span><span class="blank"></span></div>
+        <div class="field"><span class="label">정답</span><span class="blank">X</span></div>
+      </div>
+      <p class="note">자른 뒤 내용이 보이지 않게 접기</p>
+    </div>
+  </div>
+</article>
+</section></main></body></html>

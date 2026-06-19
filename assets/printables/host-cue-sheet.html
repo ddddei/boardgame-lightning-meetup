@@ -1,264 +1,44 @@
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>진행자 큐시트</title>
-    <style>
-      @page {
-        size: A4;
-        margin: 10mm;
-      }
-
-      :root {
-        --paper: #ffffff;
-        --ink: #111827;
-        --muted: #374151;
-        --line: #1f2937;
-        --soft-line: #6b7280;
-        --accent: #0f2a44;
-        --shade: #f3f4f6;
-        --neon-pink: #ff2fb3;
-        --neon-blue: #00b7ff;
-        --neon-yellow: #ffd43b;
-        --neon-green: #39ff8a;
-        --space-1: 1.2mm;
-        --space-2: 2mm;
-        --space-3: 3mm;
-        --space-4: 4.5mm;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        color: var(--ink);
-        background: var(--paper);
-        font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
-        line-height: 1.25;
-        word-break: keep-all;
-        overflow-wrap: break-word;
-      }
-
-      .page {
-        width: 190mm;
-        min-height: 277mm;
-        margin: 0 auto;
-      }
-
-      header {
-        display: grid;
-        grid-template-columns: 1fr 68mm;
-        gap: var(--space-4);
-        align-items: end;
-        border-bottom: 1pt solid var(--line);
-        box-shadow: inset 0 -0.7mm 0 var(--neon-blue);
-        padding-bottom: var(--space-2);
-        margin-bottom: var(--space-3);
-      }
-
-      .brand {
-        margin: 0 0 var(--space-1);
-        color: var(--muted);
-        font-size: 8.2pt;
-        font-weight: 900;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
-
-      h1 {
-        margin: 0 0 var(--space-1);
-        color: var(--accent);
-        border-left: 1.4mm solid var(--neon-green);
-        padding-left: var(--space-2);
-        font-size: 19.5pt;
-        line-height: 1.05;
-      }
-
-      .meta {
-        margin: 0;
-        color: var(--muted);
-        font-size: 8.7pt;
-        font-weight: 800;
-      }
-
-      .priority {
-        border: 1.6pt solid var(--line);
-        border-left: 1.5mm solid var(--neon-yellow);
-        padding: var(--space-2);
-        color: var(--accent);
-        font-size: 9.2pt;
-        font-weight: 900;
-      }
-
-      .priority strong {
-        display: block;
-        margin-bottom: var(--space-1);
-        border-bottom: 1pt solid var(--soft-line);
-        padding-bottom: var(--space-1);
-        color: var(--ink);
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: var(--space-3);
-      }
-
-      section {
-        border: 1pt solid var(--line);
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-
-      .wide {
-        grid-column: 1 / -1;
-      }
-
-      h2 {
-        display: flex;
-        justify-content: space-between;
-        gap: var(--space-2);
-        margin: 0;
-        border-bottom: 1pt solid var(--line);
-        background: var(--shade);
-        box-shadow: inset 1mm 0 0 var(--neon-blue);
-        padding: var(--space-1) var(--space-2);
-        color: var(--accent);
-        font-size: 10.6pt;
-        line-height: 1.15;
-      }
-
-      h2 span {
-        color: var(--muted);
-        font-size: 7.8pt;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
-
-      .section-body {
-        padding: var(--space-2);
-      }
-
-      ul {
-        margin: 0;
-        padding-left: 4mm;
-        font-size: 8.4pt;
-      }
-
-      li {
-        margin: 0.5mm 0;
-      }
-
-      .checklist {
-        list-style: none;
-        padding-left: 0;
-      }
-
-      .checklist li::before {
-        content: "□ ";
-        font-weight: 900;
-      }
-
-      .script {
-        margin: 0;
-        border-left: 2.4mm solid var(--neon-green);
-        padding-left: var(--space-2);
-        font-size: 8.8pt;
-        font-weight: 800;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 8.1pt;
-      }
-
-      th,
-      td {
-        border: 1pt solid var(--soft-line);
-        padding: var(--space-1);
-        vertical-align: top;
-      }
-
-      th {
-        background: var(--shade);
-        color: var(--ink);
-        font-weight: 900;
-        text-align: center;
-      }
-
-      .time {
-        width: 17mm;
-        color: var(--accent);
-        font-weight: 900;
-        text-align: center;
-        white-space: nowrap;
-      }
-
-      .game {
-        width: 19mm;
-        color: var(--accent);
-        font-weight: 900;
-        text-align: center;
-      }
-
-      .phase-row {
-        display: grid;
-        grid-template-columns: 19mm 1fr;
-        border-bottom: 1pt solid var(--soft-line);
-        font-size: 8.4pt;
-      }
-
-      .phase-row:last-child {
-        border-bottom: 0;
-      }
-
-      .phase-label {
-        border-right: 1pt solid var(--soft-line);
-        padding: var(--space-1);
-        color: var(--accent);
-        font-weight: 900;
-        text-align: center;
-      }
-
-      .phase-note {
-        padding: var(--space-1);
-        font-weight: 800;
-      }
-
-      .decision {
-        border-width: 1.6pt;
-        border-left: 1.8mm solid var(--neon-pink);
-      }
-
-      .decision strong,
-      .closing strong {
-        color: var(--accent);
-        font-weight: 900;
-      }
-
-      .closing {
-        border-width: 1.6pt;
-        border-left: 1.5mm solid var(--neon-blue);
-      }
-
-      @media print {
-        body {
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
-        }
-
-        .page {
-          width: auto;
-          min-height: auto;
-        }
-      }
-    </style>
-  </head>
-  <body>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>진행자 큐시트</title><style>
+@page { size:A4; margin:10mm; }
+:root {
+ --paper:#fffdf8; --card:#fff; --ink:#111827; --muted:#4b5563; --line:#1f2937; --soft:#cbd5e1;
+ --shade:#f5f7fb; --navy:#0b1020; --blue:#0bb8ff; --pink:#ff3aae; --yellow:#ffd84d; --green:#41e682;
+ --space-1:1.2mm; --space-2:2mm; --space-3:3mm; --space-4:4.5mm;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Nanum Gothic", system-ui, sans-serif;line-height:1.25;word-break:keep-all;overflow-wrap:break-word}
+.page{width:190mm;min-height:277mm;margin:0 auto}
+header{display:grid;grid-template-columns:1fr 68mm;gap:var(--space-4);align-items:end;margin-bottom:3mm;padding:3.5mm 4mm;border-radius:4mm;background:var(--card);border:1pt solid var(--line);border-top:3mm solid var(--navy);box-shadow:inset 0 1mm 0 var(--blue)}
+.brand{margin:0 0 1mm;color:var(--muted);font-size:8pt;font-weight:900;letter-spacing:.05em;text-transform:uppercase}
+h1{margin:0 0 1mm;color:var(--navy);font-size:19pt;line-height:1.05;letter-spacing:-.04em;border-left:1.3mm solid var(--green);padding-left:2mm}
+.meta{margin:0;color:var(--muted);font-size:8.5pt;font-weight:800}
+.priority{border:1.2pt solid var(--line);border-left:1.7mm solid var(--yellow);border-radius:2mm;padding:2mm;background:#fff;color:var(--navy);font-size:8.8pt;font-weight:900}
+.priority strong{display:block;margin-bottom:1mm;border-bottom:1pt solid var(--soft);padding-bottom:1mm;color:var(--ink)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
+section{border:1pt solid var(--line);border-radius:2mm;overflow:hidden;background:white;break-inside:avoid;page-break-inside:avoid}
+.wide{grid-column:1/-1}
+h2{display:flex;justify-content:space-between;gap:2mm;margin:0;padding:1.6mm 2.2mm;background:var(--navy);color:white;font-size:10.2pt;line-height:1.15;border-bottom:1pt solid var(--line)}
+h2::before{content:"";display:inline-block;width:1.2mm;background:var(--blue);margin-right:1mm}
+h2 span{color:#dbeafe;font-size:7.4pt;letter-spacing:.05em;text-transform:uppercase}
+.section-body{padding:2mm}
+ul{margin:0;padding-left:4mm;font-size:8.2pt}
+li{margin:.5mm 0}
+.checklist{list-style:none;padding-left:0}
+.checklist li::before{content:"□ ";font-weight:900;color:var(--blue)}
+.script{margin:0;border-left:1.5mm solid var(--pink);padding-left:2mm;font-size:8.5pt;font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:7.9pt}
+th,td{border:1pt solid var(--soft);padding:1.1mm;vertical-align:top}
+th{background:var(--shade);color:var(--ink);font-weight:900;text-align:center}
+.time,.game{color:var(--navy);font-weight:900;text-align:center;white-space:nowrap}
+.time{width:17mm} .game{width:19mm}
+.phase-row{display:grid;grid-template-columns:19mm 1fr;border-bottom:1pt solid var(--soft);font-size:8.2pt}
+.phase-row:last-child{border-bottom:0}
+.phase-label{border-right:1pt solid var(--soft);padding:1mm;color:var(--navy);font-weight:900;text-align:center;background:var(--shade)}
+.phase-note{padding:1mm;font-weight:800}
+.decision{border-left:1.6mm solid var(--pink)} .closing{border-left:1.6mm solid var(--blue)}
+.decision strong,.closing strong{font-weight:900;color:var(--navy)}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}.page{width:auto;min-height:auto}}
+</style></head><body>
     <main class="page">
       <header>
         <div>
@@ -351,5 +131,4 @@
         </section>
       </div>
     </main>
-  </body>
-</html>
+  </body></html>
