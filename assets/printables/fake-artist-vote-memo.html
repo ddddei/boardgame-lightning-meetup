@@ -32,10 +32,8 @@
         margin: 0;
         color: var(--ink);
         background: var(--paper);
-        font-family:
-          "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", -apple-system,
-          BlinkMacSystemFont, "Segoe UI", sans-serif;
-        line-height: 1.35;
+        font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+        line-height: 1.32;
         word-break: keep-all;
         overflow-wrap: break-word;
       }
@@ -48,12 +46,21 @@
 
       header {
         display: grid;
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr 36mm;
         gap: var(--space-4);
         align-items: end;
         border-bottom: 2pt solid var(--line);
-        padding-bottom: var(--space-1);
+        padding-bottom: var(--space-2);
         margin-bottom: var(--space-2);
+      }
+
+      .brand {
+        margin: 0 0 var(--space-1);
+        color: var(--muted);
+        font-size: 8.5pt;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
       }
 
       h1 {
@@ -66,18 +73,22 @@
       .notice {
         margin: 0;
         color: var(--muted);
-        font-size: 9.6pt;
-        font-weight: 700;
+        font-size: 9.2pt;
+        font-weight: 800;
       }
 
       .use-note {
-        border: 1.4pt solid var(--line);
-        padding: var(--space-1) var(--space-2);
+        border: 1.5pt solid var(--line);
+        padding: var(--space-2);
         color: var(--accent);
         font-size: 10pt;
         font-weight: 900;
         text-align: center;
-        white-space: nowrap;
+      }
+
+      .use-note strong {
+        display: block;
+        font-size: 15pt;
       }
 
       .memos {
@@ -87,16 +98,18 @@
       }
 
       .memo {
-        min-height: 70mm;
+        min-height: 72mm;
         border: 1.6pt dashed var(--line);
         padding: var(--space-2);
         break-inside: avoid;
+        page-break-inside: avoid;
       }
 
       .memo-inner {
         min-height: 100%;
         border: 1pt solid var(--soft-line);
-        padding: var(--space-2);
+        display: grid;
+        grid-template-rows: auto auto auto 1fr;
       }
 
       .memo-title {
@@ -105,49 +118,54 @@
         gap: var(--space-3);
         align-items: center;
         border-bottom: 1.2pt solid var(--line);
-        padding-bottom: var(--space-1);
-        margin-bottom: var(--space-1);
+        background: var(--shade);
+        padding: var(--space-1) var(--space-2);
         color: var(--accent);
-        font-size: 12.5pt;
+        font-size: 11.5pt;
         font-weight: 900;
       }
 
-      .cut-label {
+      .stamp {
+        border: 1pt solid var(--line);
+        padding: 0.5mm var(--space-1);
         color: var(--muted);
-        font-size: 8.5pt;
-        font-weight: 800;
+        font-size: 7.6pt;
+        letter-spacing: 0.04em;
       }
 
-      .field {
+      .field-row {
         display: grid;
-        grid-template-columns: 36mm 1fr;
-        gap: var(--space-2);
-        align-items: end;
-        margin-top: var(--space-1);
-        font-size: 11pt;
+        grid-template-columns: 24mm 1fr;
+        border-bottom: 1pt solid var(--soft-line);
+      }
+
+      .field-row span {
+        min-height: 10mm;
+        padding: var(--space-1) var(--space-2);
+        font-size: 10.5pt;
         font-weight: 900;
       }
 
-      .field:first-of-type {
-        margin-top: 0;
+      .field-label {
+        border-right: 1pt solid var(--soft-line);
+        color: var(--accent);
       }
 
-      .blank {
-        min-height: 7mm;
-        border-bottom: 1.4pt solid var(--line);
+      .field-blank {
+        background: linear-gradient(to bottom, transparent 84%, var(--soft-line) 86%, transparent 88%);
       }
 
       .memo-area {
-        margin-top: var(--space-2);
-        border: 1pt solid var(--line);
+        display: grid;
+        grid-template-rows: auto 1fr;
       }
 
       .memo-area-title {
         margin: 0;
         border-bottom: 1pt solid var(--line);
-        background: var(--shade);
         padding: var(--space-1) var(--space-2);
-        font-size: 10pt;
+        color: var(--muted);
+        font-size: 9.5pt;
         font-weight: 900;
       }
 
@@ -156,7 +174,7 @@
       }
 
       .memo-line {
-        height: 7mm;
+        height: 7.2mm;
         border-bottom: 1pt dotted var(--soft-line);
       }
 
@@ -177,82 +195,65 @@
     <main class="page">
       <header>
         <div>
+          <p class="brand">Boardgame Lightning Meetup · 제출 슬립</p>
           <h1>가짜예술가 투표 메모</h1>
-          <p class="notice">라운드마다 한 장씩 잘라 쓰는 빠른 제출용 메모입니다. 번호나 이름만 적고 바로 모읍니다.</p>
+          <p class="notice">라운드마다 한 장씩 잘라 쓰는 빠른 제출용 메모입니다. 의심 인물과 근거를 짧게 적고 바로 모읍니다.</p>
         </div>
-        <div class="use-note">6장 절취</div>
+        <div class="use-note"><strong>6</strong>cut slips</div>
       </header>
 
       <section class="memos" aria-label="가짜예술가 투표 메모 6장">
         <article class="memo">
           <div class="memo-inner">
-            <div class="memo-title"><span>투표 메모</span><span class="cut-label">절취선</span></div>
-            <div class="field"><span>라운드</span><span class="blank"></span></div>
-            <div class="field"><span>의심 번호/이름</span><span class="blank"></span></div>
-            <div class="memo-area">
-              <p class="memo-area-title">간단 메모</p>
-              <div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div>
-            </div>
+            <div class="memo-title"><span>투표 제출표</span><span class="stamp">CUT LINE</span></div>
+            <div class="field-row"><span class="field-label">라운드</span><span class="field-blank"></span></div>
+            <div class="field-row"><span class="field-label">의심 인물</span><span class="field-blank"></span></div>
+            <div class="memo-area"><p class="memo-area-title">메모 · 한 획, 말투, 순서 기억</p><div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div></div>
           </div>
         </article>
 
         <article class="memo">
           <div class="memo-inner">
-            <div class="memo-title"><span>투표 메모</span><span class="cut-label">절취선</span></div>
-            <div class="field"><span>라운드</span><span class="blank"></span></div>
-            <div class="field"><span>의심 번호/이름</span><span class="blank"></span></div>
-            <div class="memo-area">
-              <p class="memo-area-title">간단 메모</p>
-              <div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div>
-            </div>
+            <div class="memo-title"><span>투표 제출표</span><span class="stamp">CUT LINE</span></div>
+            <div class="field-row"><span class="field-label">라운드</span><span class="field-blank"></span></div>
+            <div class="field-row"><span class="field-label">의심 인물</span><span class="field-blank"></span></div>
+            <div class="memo-area"><p class="memo-area-title">메모 · 한 획, 말투, 순서 기억</p><div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div></div>
           </div>
         </article>
 
         <article class="memo">
           <div class="memo-inner">
-            <div class="memo-title"><span>투표 메모</span><span class="cut-label">절취선</span></div>
-            <div class="field"><span>라운드</span><span class="blank"></span></div>
-            <div class="field"><span>의심 번호/이름</span><span class="blank"></span></div>
-            <div class="memo-area">
-              <p class="memo-area-title">간단 메모</p>
-              <div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div>
-            </div>
+            <div class="memo-title"><span>투표 제출표</span><span class="stamp">CUT LINE</span></div>
+            <div class="field-row"><span class="field-label">라운드</span><span class="field-blank"></span></div>
+            <div class="field-row"><span class="field-label">의심 인물</span><span class="field-blank"></span></div>
+            <div class="memo-area"><p class="memo-area-title">메모 · 한 획, 말투, 순서 기억</p><div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div></div>
           </div>
         </article>
 
         <article class="memo">
           <div class="memo-inner">
-            <div class="memo-title"><span>투표 메모</span><span class="cut-label">절취선</span></div>
-            <div class="field"><span>라운드</span><span class="blank"></span></div>
-            <div class="field"><span>의심 번호/이름</span><span class="blank"></span></div>
-            <div class="memo-area">
-              <p class="memo-area-title">간단 메모</p>
-              <div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div>
-            </div>
+            <div class="memo-title"><span>투표 제출표</span><span class="stamp">CUT LINE</span></div>
+            <div class="field-row"><span class="field-label">라운드</span><span class="field-blank"></span></div>
+            <div class="field-row"><span class="field-label">의심 인물</span><span class="field-blank"></span></div>
+            <div class="memo-area"><p class="memo-area-title">메모 · 한 획, 말투, 순서 기억</p><div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div></div>
           </div>
         </article>
 
         <article class="memo">
           <div class="memo-inner">
-            <div class="memo-title"><span>투표 메모</span><span class="cut-label">절취선</span></div>
-            <div class="field"><span>라운드</span><span class="blank"></span></div>
-            <div class="field"><span>의심 번호/이름</span><span class="blank"></span></div>
-            <div class="memo-area">
-              <p class="memo-area-title">간단 메모</p>
-              <div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div>
-            </div>
+            <div class="memo-title"><span>투표 제출표</span><span class="stamp">CUT LINE</span></div>
+            <div class="field-row"><span class="field-label">라운드</span><span class="field-blank"></span></div>
+            <div class="field-row"><span class="field-label">의심 인물</span><span class="field-blank"></span></div>
+            <div class="memo-area"><p class="memo-area-title">메모 · 한 획, 말투, 순서 기억</p><div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div></div>
           </div>
         </article>
 
         <article class="memo">
           <div class="memo-inner">
-            <div class="memo-title"><span>투표 메모</span><span class="cut-label">절취선</span></div>
-            <div class="field"><span>라운드</span><span class="blank"></span></div>
-            <div class="field"><span>의심 번호/이름</span><span class="blank"></span></div>
-            <div class="memo-area">
-              <p class="memo-area-title">간단 메모</p>
-              <div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div>
-            </div>
+            <div class="memo-title"><span>투표 제출표</span><span class="stamp">CUT LINE</span></div>
+            <div class="field-row"><span class="field-label">라운드</span><span class="field-blank"></span></div>
+            <div class="field-row"><span class="field-label">의심 인물</span><span class="field-blank"></span></div>
+            <div class="memo-area"><p class="memo-area-title">메모 · 한 획, 말투, 순서 기억</p><div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div></div>
           </div>
         </article>
       </section>

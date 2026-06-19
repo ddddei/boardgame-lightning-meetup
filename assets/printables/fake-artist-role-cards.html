@@ -32,10 +32,8 @@
         margin: 0;
         color: var(--ink);
         background: var(--paper);
-        font-family:
-          "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", -apple-system,
-          BlinkMacSystemFont, "Segoe UI", sans-serif;
-        line-height: 1.35;
+        font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+        line-height: 1.32;
         word-break: keep-all;
         overflow-wrap: break-word;
       }
@@ -48,12 +46,34 @@
 
       header {
         display: grid;
-        grid-template-columns: 1fr auto;
-        gap: var(--space-4);
+        grid-template-columns: 1fr 43mm;
+        gap: var(--space-3);
         align-items: end;
         border-bottom: 2pt solid var(--line);
-        padding-bottom: var(--space-2);
-        margin-bottom: var(--space-3);
+        padding-bottom: var(--space-1);
+        margin-bottom: var(--space-2);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-1);
+        margin-bottom: var(--space-1);
+        color: var(--muted);
+        font-size: 8.6pt;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .brand::before,
+      .brand::after {
+        content: "";
+        display: inline-block;
+        width: 5mm;
+        height: 1.5mm;
+        border-top: 1pt solid var(--line);
+        border-bottom: 1pt solid var(--line);
       }
 
       h1 {
@@ -66,18 +86,25 @@
       .notice {
         margin: 0;
         color: var(--muted);
-        font-size: 10.5pt;
-        font-weight: 700;
+        font-size: 9.6pt;
+        font-weight: 800;
       }
 
       .count {
-        border: 1.4pt solid var(--line);
-        padding: var(--space-1) var(--space-2);
+        border: 1.5pt solid var(--line);
+        padding: var(--space-2);
         color: var(--accent);
-        font-size: 11pt;
+        font-size: 10pt;
         font-weight: 900;
         text-align: center;
-        white-space: nowrap;
+      }
+
+      .count strong {
+        display: block;
+        margin-bottom: var(--space-1);
+        border-bottom: 1pt solid var(--soft-line);
+        padding-bottom: var(--space-1);
+        font-size: 13pt;
       }
 
       .cards {
@@ -87,36 +114,73 @@
       }
 
       .card {
-        height: 58mm;
+        height: 54.2mm;
         border: 1.6pt dashed var(--line);
         padding: var(--space-2);
         break-inside: avoid;
+        page-break-inside: avoid;
       }
 
       .safe-zone {
+        position: relative;
         height: 100%;
         border: 1pt solid var(--soft-line);
-        padding: var(--space-3);
+        padding: 1.8mm;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
       }
 
+      .safe-zone::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-top: 3.5mm solid var(--shade);
+        pointer-events: none;
+      }
+
       .card-meta {
+        position: relative;
+        z-index: 1;
         display: flex;
         justify-content: space-between;
-        gap: var(--space-3);
+        gap: var(--space-2);
         color: var(--muted);
-        font-size: 9.5pt;
-        font-weight: 800;
+        font-size: 8.6pt;
+        font-weight: 900;
+        letter-spacing: 0.03em;
+      }
+
+      .card-number {
+        color: var(--accent);
       }
 
       .role {
-        margin: 0;
+        position: relative;
+        margin: var(--space-1) 0 0;
+        border-top: 1pt solid var(--line);
+        border-bottom: 1pt solid var(--line);
+        padding: var(--space-1) 0;
         color: var(--accent);
-        font-size: 16pt;
+        font-size: 14.8pt;
         font-weight: 900;
         text-align: center;
+      }
+
+      .role::before,
+      .role::after {
+        content: "✦";
+        color: var(--muted);
+        font-size: 8pt;
+        vertical-align: middle;
+      }
+
+      .role::before {
+        margin-right: var(--space-2);
+      }
+
+      .role::after {
+        margin-left: var(--space-2);
       }
 
       .fields {
@@ -129,16 +193,19 @@
         grid-template-columns: 24mm 1fr;
         gap: var(--space-2);
         align-items: end;
-        font-size: 12pt;
+        font-size: 10.8pt;
         font-weight: 900;
       }
 
       .label {
+        border: 1pt solid var(--soft-line);
+        padding: 0.8mm var(--space-1);
         color: var(--ink);
+        text-align: center;
       }
 
       .line {
-        min-height: 8mm;
+        min-height: 7mm;
         border-bottom: 1.4pt solid var(--line);
         text-align: center;
         font-size: 18pt;
@@ -156,8 +223,8 @@
         border-top: 1pt dotted var(--soft-line);
         padding-top: var(--space-1);
         color: var(--muted);
-        font-size: 8.8pt;
-        font-weight: 700;
+        font-size: 8.1pt;
+        font-weight: 800;
         text-align: center;
       }
 
@@ -178,106 +245,107 @@
     <main class="page">
       <header>
         <div>
-          <h1>가짜예술가 역할 카드</h1>
+          <div class="brand">Boardgame Lightning Meetup</div>
+          <h1>가짜예술가 라운드 키트</h1>
           <p class="notice">접어 섞은 뒤 진행자 포함 8명에게 1장씩 배부합니다. 진행자도 자기 카드만 봅니다.</p>
         </div>
-        <div class="count">예술가 7장 + X 1장</div>
+        <div class="count"><strong>8 Cards</strong>예술가 7장<br />X 1장</div>
       </header>
 
       <section class="cards" aria-label="가짜예술가 역할 카드 8장">
         <article class="card">
           <div class="safe-zone">
-            <div class="card-meta"><span>카드 1</span><span>역할 카드</span></div>
+            <div class="card-meta"><span class="card-number">CARD 01</span><span>ROLE</span></div>
             <p class="role">예술가</p>
             <div class="fields">
               <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
               <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
+            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
           <div class="safe-zone">
-            <div class="card-meta"><span>카드 2</span><span>역할 카드</span></div>
+            <div class="card-meta"><span class="card-number">CARD 02</span><span>ROLE</span></div>
             <p class="role">예술가</p>
             <div class="fields">
               <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
               <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
+            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
           <div class="safe-zone">
-            <div class="card-meta"><span>카드 3</span><span>역할 카드</span></div>
+            <div class="card-meta"><span class="card-number">CARD 03</span><span>ROLE</span></div>
             <p class="role">예술가</p>
             <div class="fields">
               <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
               <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
+            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
           <div class="safe-zone">
-            <div class="card-meta"><span>카드 4</span><span>역할 카드</span></div>
+            <div class="card-meta"><span class="card-number">CARD 04</span><span>ROLE</span></div>
             <p class="role">예술가</p>
             <div class="fields">
               <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
               <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
+            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
           <div class="safe-zone">
-            <div class="card-meta"><span>카드 5</span><span>역할 카드</span></div>
+            <div class="card-meta"><span class="card-number">CARD 05</span><span>ROLE</span></div>
             <p class="role">예술가</p>
             <div class="fields">
               <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
               <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
+            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
           <div class="safe-zone">
-            <div class="card-meta"><span>카드 6</span><span>역할 카드</span></div>
+            <div class="card-meta"><span class="card-number">CARD 06</span><span>ROLE</span></div>
             <p class="role">예술가</p>
             <div class="fields">
               <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
               <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
+            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
           <div class="safe-zone">
-            <div class="card-meta"><span>카드 7</span><span>역할 카드</span></div>
+            <div class="card-meta"><span class="card-number">CARD 07</span><span>ROLE</span></div>
             <p class="role">예술가</p>
             <div class="fields">
               <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
               <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
+            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
           <div class="safe-zone">
-            <div class="card-meta"><span>카드 8</span><span>역할 카드</span></div>
+            <div class="card-meta"><span class="card-number">CARD 08</span><span>ROLE</span></div>
             <p class="role">가짜예술가</p>
             <div class="fields">
               <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
               <div class="field"><span class="label">정답</span><span class="line x-value">X</span></div>
             </div>
-            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
+            <p class="fold-note">절취선 바깥쪽을 자르고 내용이 안 보이게 접기</p>
           </div>
         </article>
       </section>

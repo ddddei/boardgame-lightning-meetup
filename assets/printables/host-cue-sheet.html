@@ -32,10 +32,8 @@
         margin: 0;
         color: var(--ink);
         background: var(--paper);
-        font-family:
-          "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", -apple-system,
-          BlinkMacSystemFont, "Segoe UI", sans-serif;
-        line-height: 1.28;
+        font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+        line-height: 1.25;
         word-break: keep-all;
         overflow-wrap: break-word;
       }
@@ -48,7 +46,7 @@
 
       header {
         display: grid;
-        grid-template-columns: 1fr 72mm;
+        grid-template-columns: 1fr 68mm;
         gap: var(--space-4);
         align-items: end;
         border-bottom: 2pt solid var(--line);
@@ -56,17 +54,26 @@
         margin-bottom: var(--space-3);
       }
 
+      .brand {
+        margin: 0 0 var(--space-1);
+        color: var(--muted);
+        font-size: 8.2pt;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
       h1 {
         margin: 0 0 var(--space-1);
         color: var(--accent);
-        font-size: 20pt;
+        font-size: 19.5pt;
         line-height: 1.05;
       }
 
       .meta {
         margin: 0;
         color: var(--muted);
-        font-size: 9pt;
+        font-size: 8.7pt;
         font-weight: 800;
       }
 
@@ -74,8 +81,16 @@
         border: 1.6pt solid var(--line);
         padding: var(--space-2);
         color: var(--accent);
-        font-size: 9.5pt;
+        font-size: 9.2pt;
         font-weight: 900;
+      }
+
+      .priority strong {
+        display: block;
+        margin-bottom: var(--space-1);
+        border-bottom: 1pt solid var(--soft-line);
+        padding-bottom: var(--space-1);
+        color: var(--ink);
       }
 
       .grid {
@@ -86,8 +101,8 @@
 
       section {
         border: 1pt solid var(--line);
-        padding: var(--space-2);
         break-inside: avoid;
+        page-break-inside: avoid;
       }
 
       .wide {
@@ -95,22 +110,37 @@
       }
 
       h2 {
-        margin: 0 0 var(--space-2);
-        border-bottom: 1pt solid var(--soft-line);
-        padding-bottom: var(--space-1);
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-2);
+        margin: 0;
+        border-bottom: 1pt solid var(--line);
+        background: var(--shade);
+        padding: var(--space-1) var(--space-2);
         color: var(--accent);
-        font-size: 11.2pt;
+        font-size: 10.6pt;
         line-height: 1.15;
+      }
+
+      h2 span {
+        color: var(--muted);
+        font-size: 7.8pt;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .section-body {
+        padding: var(--space-2);
       }
 
       ul {
         margin: 0;
-        padding-left: 4.2mm;
-        font-size: 8.8pt;
+        padding-left: 4mm;
+        font-size: 8.4pt;
       }
 
       li {
-        margin: 0.6mm 0;
+        margin: 0.5mm 0;
       }
 
       .checklist {
@@ -125,14 +155,16 @@
 
       .script {
         margin: 0;
-        font-size: 9.2pt;
+        border-left: 2.4mm solid var(--line);
+        padding-left: var(--space-2);
+        font-size: 8.8pt;
         font-weight: 800;
       }
 
       table {
         width: 100%;
         border-collapse: collapse;
-        font-size: 8.4pt;
+        font-size: 8.1pt;
       }
 
       th,
@@ -150,7 +182,7 @@
       }
 
       .time {
-        width: 18mm;
+        width: 17mm;
         color: var(--accent);
         font-weight: 900;
         text-align: center;
@@ -158,23 +190,48 @@
       }
 
       .game {
-        width: 20mm;
+        width: 19mm;
         color: var(--accent);
         font-weight: 900;
         text-align: center;
       }
 
-      .decision {
-        border: 1.5pt solid var(--line);
+      .phase-row {
+        display: grid;
+        grid-template-columns: 19mm 1fr;
+        border-bottom: 1pt solid var(--soft-line);
+        font-size: 8.4pt;
       }
 
-      .decision strong {
+      .phase-row:last-child {
+        border-bottom: 0;
+      }
+
+      .phase-label {
+        border-right: 1pt solid var(--soft-line);
+        padding: var(--space-1);
+        color: var(--accent);
+        font-weight: 900;
+        text-align: center;
+      }
+
+      .phase-note {
+        padding: var(--space-1);
+        font-weight: 800;
+      }
+
+      .decision {
+        border-width: 1.6pt;
+      }
+
+      .decision strong,
+      .closing strong {
         color: var(--accent);
         font-weight: 900;
       }
 
       .closing {
-        border-width: 1.5pt;
+        border-width: 1.6pt;
       }
 
       @media print {
@@ -194,30 +251,36 @@
     <main class="page">
       <header>
         <div>
+          <p class="brand">Boardgame Lightning Meetup · 진행자 현장판</p>
           <h1>진행자 큐시트</h1>
           <p class="meta">기준: 진행자 포함 8명 · 진행자 겸 플레이어 · 2시간 기본 · 18:00 이후 연장 가능</p>
         </div>
-        <div class="priority">우선순위: 가짜예술가 필수, 달무티 우선, 사보타지는 메인/피날레 후보, 젝스님트는 여유 있을 때만.</div>
+        <div class="priority"><strong>운영 우선순위</strong>가짜예술가 필수 · 달무티 우선 · 사보타지는 메인/피날레 후보 · 젝스님트는 여유 있을 때만.</div>
       </header>
 
       <div class="grid">
         <section>
-          <h2>시작 전 체크</h2>
-          <ul class="checklist">
-            <li>8명 자리, 필기구, 휴대폰 타이머</li>
-            <li>가짜예술가 역할 카드 8장, 투표 메모</li>
-            <li>카드 8장을 접어 섞고 진행자 포함 1장씩 배부</li>
-            <li>사보타지 요약은 진행자만 볼 위치</li>
-          </ul>
+          <h2>시작 전 <span>before start</span></h2>
+          <div class="section-body">
+            <ul class="checklist">
+              <li>8명 자리, 필기구, 휴대폰 타이머</li>
+              <li>가짜예술가 역할 카드 8장, 투표 메모, 큐시트</li>
+              <li>가짜예술가 먼저 꺼내기, 나머지는 순서대로 정리</li>
+              <li>카드 8장을 접어 섞고 진행자 포함 1장씩 배부</li>
+              <li>사보타지 요약은 진행자만 볼 위치</li>
+            </ul>
+          </div>
         </section>
 
         <section>
-          <h2>오프닝 스크립트</h2>
-          <p class="script">오늘은 2시간 기준으로 가볍게 여러 게임을 해보겠습니다. 저도 같이 플레이하니 세팅, 기록, 카드 정리는 중간중간 나눠 부탁드릴게요. 시간에 맞춰 일부 게임은 조정합니다.</p>
+          <h2>오프닝 <span>opening</span></h2>
+          <div class="section-body">
+            <p class="script">오늘은 2시간 기준으로 가볍게 여러 게임을 해보겠습니다. 저도 같이 플레이해서 세팅, 기록, 카드 정리는 중간중간 나눠 부탁드릴게요. 가짜예술가는 꼭 하고, 달무티를 우선 진행하겠습니다. 시간이 맞으면 사보타지까지 하고, 젝스님트는 여유가 있을 때만 넣겠습니다.</p>
+          </div>
         </section>
 
         <section class="wide">
-          <h2>기본 타임테이블</h2>
+          <h2>진행 중 시간표 <span>during play</span></h2>
           <table>
             <thead>
               <tr><th>시간</th><th>진행</th><th>판단 기준</th></tr>
@@ -226,7 +289,7 @@
               <tr><td class="time">00:00</td><td>인사, 자리 정리, 오늘 흐름 안내</td><td>진행자도 플레이어, 도움 요청</td></tr>
               <tr><td class="time">00:05</td><td>가짜예술가 1판, 가능하면 2판</td><td>00:25에는 달무티로 이동</td></tr>
               <tr><td class="time">00:25</td><td>달무티 2판 이상</td><td>분위기 좋으면 1판 추가</td></tr>
-              <tr><td class="time">01:05</td><td>젝스님트 1판 또는 제외</td><td>설명 길거나 시간이 빠듯하면 제외</td></tr>
+              <tr><td class="time">01:05</td><td>젝스님트 1판 또는 제외 판단</td><td>설명 길거나 시간이 빠듯하면 제외</td></tr>
               <tr><td class="time">01:20</td><td>사보타지 1라운드 또는 달무티 추가</td><td>사보타지는 35분 이상 남을 때만</td></tr>
               <tr><td class="time">01:50</td><td>새 라운드 금지, 현재 판만 정리</td><td>종료 10분 전 새 라운드 금지</td></tr>
               <tr><td class="time">01:55</td><td>구성품 확인, 마무리 안내</td><td>연장 가능 인원 확인</td></tr>
@@ -234,8 +297,16 @@
           </table>
         </section>
 
+        <section>
+          <h2>진행 중 원칙 <span>host notes</span></h2>
+          <div class="phase-row"><div class="phase-label">타이머</div><div class="phase-note">시작, 25분, 60분, 종료 10분 전 확인</div></div>
+          <div class="phase-row"><div class="phase-label">정보</div><div class="phase-note">가짜예술가 카드는 진행자도 자기 카드만 보기</div></div>
+          <div class="phase-row"><div class="phase-label">분담</div><div class="phase-note">투표, 순위, 카드 섞기는 참가자에게 부탁</div></div>
+          <div class="phase-row"><div class="phase-label">참여</div><div class="phase-note">투표와 의심 발언은 한 명씩 짧게 기회 주기</div></div>
+        </section>
+
         <section class="decision">
-          <h2>시간 부족 결정</h2>
+          <h2>시간 부족 시 <span>shortage</span></h2>
           <table>
             <tbody>
               <tr><td class="game">기본 축소</td><td><strong>젝스님트 제외</strong>. 가짜예술가 1판, 달무티 2판 유지.</td></tr>
@@ -246,34 +317,26 @@
           </table>
         </section>
 
-        <section>
-          <h2>진행 중 원칙</h2>
-          <ul>
-            <li>타이머: 시작, 25분, 60분, 종료 10분 전 확인</li>
-            <li>투표, 순위, 카드 섞기는 참가자에게 부탁</li>
-            <li>가짜예술가 카드는 진행자도 자기 카드만 보기</li>
-            <li>투표와 의심 발언은 한 명씩 짧게 기회 주기</li>
-          </ul>
-        </section>
-
         <section class="wide">
-          <h2>게임 전환 스크립트</h2>
+          <h2>게임 전환 멘트 <span>handoff</span></h2>
           <table>
             <thead>
               <tr><th>게임</th><th>30초 설명</th><th>넘어갈 말</th></tr>
             </thead>
             <tbody>
-              <tr><td class="game">가짜예술가</td><td>한 획씩 그림을 잇습니다. 한 명만 X를 받았고, 가짜는 들켜도 정답을 맞히면 기회가 있습니다.</td><td>분위기 풀렸으니 달무티로 넘어가겠습니다.</td></tr>
-              <tr><td class="game">달무티</td><td>먼저 다 내려놓으면 이깁니다. 낮은 숫자가 강하고, 앞사람보다 강하게 내거나 패스합니다.</td><td>여기서 달무티는 마무리하고 시간 보고 다음 게임을 정하겠습니다.</td></tr>
-              <tr><td class="game">젝스님트</td><td>숫자 1장을 동시에 고르고 낮은 숫자부터 붙입니다. 6번째 줄을 가져가며, 벌점이 적을수록 좋습니다.</td><td>짧게 한 판 했으니 마지막 게임으로 넘어가겠습니다.</td></tr>
-              <tr><td class="game">사보타지</td><td>광부는 금까지 길을 잇고 사보타지는 몰래 방해합니다. 역할은 비밀이고 말은 믿거나 의심해도 됩니다.</td><td>현재 라운드까지만 하고 구성품을 확인하겠습니다.</td></tr>
+              <tr><td class="game">가짜예술가</td><td>같은 카테고리 안에서 그림을 한 획씩 이어 그립니다. 한 명만 정답 대신 X를 받은 가짜예술가입니다. 누가 가짜인지 찾고, 가짜는 정답을 맞히면 기회가 있습니다.</td><td>분위기 풀렸으니 달무티로 넘어가겠습니다.</td></tr>
+              <tr><td class="game">달무티</td><td>카드를 먼저 다 내려놓으면 이깁니다. 숫자가 낮을수록 강하고, 같은 숫자는 여러 장 낼 수 있습니다. 앞사람보다 강하게 내거나 패스합니다.</td><td>여기서 달무티는 마무리하고 시간 보고 다음 게임을 정하겠습니다.</td></tr>
+              <tr><td class="game">젝스님트</td><td>숫자 카드 1장을 동시에 고르고 낮은 숫자부터 줄에 붙입니다. 6번째 카드가 되면 그 줄을 가져가 벌점을 받습니다. 벌점이 적을수록 좋습니다.</td><td>짧게 한 판 했으니 마지막 게임으로 넘어가겠습니다.</td></tr>
+              <tr><td class="game">사보타지</td><td>광부 팀은 금까지 길을 잇고, 사보타지는 몰래 방해합니다. 역할은 비밀입니다. 말은 믿어도 되고 의심해도 됩니다.</td><td>여기서 라운드를 마무리하고 구성품을 확인하겠습니다.</td></tr>
             </tbody>
           </table>
         </section>
 
         <section class="wide closing">
-          <h2>클로징 스크립트</h2>
-          <p class="script">오늘 게임은 여기서 마무리하겠습니다. 카드와 구성품만 같이 확인하고, 18:00 이후 진행이나 뒤풀이 안내를 바로 이어가겠습니다. 좋았던 점이나 아쉬웠던 점도 짧게 알려주세요.</p>
+          <h2>마무리 <span>closing</span></h2>
+          <div class="section-body">
+            <p class="script"><strong>오늘 게임은 여기서 마무리하겠습니다.</strong> 카드와 구성품만 같이 확인하고, 18:00 이후 진행이나 뒤풀이 안내를 바로 이어가겠습니다. 좋았던 점이나 아쉬웠던 점도 짧게 알려주세요.</p>
+          </div>
         </section>
       </div>
     </main>
