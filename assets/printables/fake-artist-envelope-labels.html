@@ -1,0 +1,125 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>가짜예술가 봉투 라벨</title><style>
+@page { size:A4; margin:10mm; }
+:root {
+  --paper:#ffffff;
+  --card:#ffffff;
+  --ink:#111827;
+  --muted:#4b5563;
+  --line:#111827;
+  --soft:#d8dee8;
+  --navy:#07101f;
+  --pink:#ff2fb3;
+  --blue:#00aef3;
+  --yellow:#ffd84d;
+  --green:#33dc84;
+}
+* { box-sizing:border-box; }
+html,body { margin:0; padding:0; }
+body {
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Nanum Gothic",system-ui,sans-serif;
+  line-height:1.28;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.page { width:190mm; min-height:277mm; margin:0 auto; padding:2mm 0; }
+.sheet-title {
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:8mm;
+  min-height:24mm;
+  margin:0 0 6mm;
+  padding:5mm 6mm 4.5mm;
+  color:white;
+  background:
+    radial-gradient(circle at 92% 18%, rgba(255,47,179,.24), transparent 24mm),
+    linear-gradient(135deg,#07101f 0%,#101a31 72%,#151f3a 100%);
+  border:.8pt solid #263653;
+  border-radius:4mm;
+  overflow:hidden;
+}
+.sheet-title::before {
+  content:"";
+  position:absolute;
+  left:6mm; right:6mm; top:3mm;
+  height:1mm;
+  border-radius:10mm;
+  background:linear-gradient(90deg,
+    var(--pink) 0 15%, transparent 15% 25%,
+    var(--yellow) 25% 42%, transparent 42% 52%,
+    var(--blue) 52% 71%, transparent 71% 81%,
+    var(--green) 81% 100%);
+}
+.eyebrow {
+  margin:0 0 1.2mm;
+  color:#dbe6f6;
+  font-size:7.6pt;
+  font-weight:900;
+  letter-spacing:.05em;
+}
+h1 { margin:0; color:white; font-size:18pt; line-height:1.15; letter-spacing:-.04em; font-weight:900; }
+.hint { margin:0 0 .5mm; color:#e8eef8; font-size:8.4pt; font-weight:760; text-align:right; }
+.labels { display:grid; grid-template-columns:1fr; gap:5.5mm; }
+.label {
+  position:relative;
+  display:grid;
+  grid-template-columns:32mm 1fr;
+  align-items:center;
+  min-height:43mm;
+  padding:6mm 7mm;
+  background:var(--card);
+  border:1.25pt solid var(--line);
+  border-radius:4mm;
+  box-shadow:inset 0 0 0 .45pt #ffffff;
+  overflow:hidden;
+}
+.label::before,.label::after {
+  content:"";
+  position:absolute;
+  z-index:0;
+  width:9mm; height:9mm;
+  border:.7pt solid var(--soft);
+}
+.label::before { left:2.5mm; top:2.5mm; border-right:0; border-bottom:0; }
+.label::after { right:2.5mm; bottom:2.5mm; border-left:0; border-top:0; }
+.round {
+  position:relative;
+  z-index:1;
+  display:grid;
+  place-items:center;
+  width:24mm;
+  height:24mm;
+  color:white;
+  background:var(--navy);
+  border:1.1pt solid var(--line);
+  border-radius:50%;
+  font-size:20pt;
+  font-weight:950;
+  letter-spacing:-.04em;
+  box-shadow:0 0 0 1.8mm #f5f7fb, 0 0 0 2.1mm var(--line);
+}
+.copy { position:relative; z-index:1; display:grid; gap:2.2mm; }
+.main { font-size:16.5pt; font-weight:950; letter-spacing:-.04em; }
+.rules { display:flex; flex-wrap:wrap; gap:2mm; margin:0; padding:0; list-style:none; }
+.rules li {
+  padding:1.25mm 2.4mm 1.1mm;
+  border:.75pt solid var(--soft);
+  border-radius:99mm;
+  color:var(--muted);
+  background:#f8fafc;
+  font-size:9.4pt;
+  font-weight:850;
+}
+.rule-strong { color:var(--ink); border-color:var(--line); background:#ffffff; }
+@media print {
+  * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  html,body { width:210mm; min-height:297mm; background:#ffffff; }
+  .page { width:190mm; min-height:277mm; padding:0; }
+  .label { break-inside:avoid; page-break-inside:avoid; }
+}
+</style></head><body><main class="page"><section class="sheet-title" aria-label="가짜예술가 봉투 라벨 안내"><div><p class="eyebrow">FAKE ARTIST ENVELOPE LABELS</p><h1>가짜예술가 봉투 라벨</h1></div><p class="hint">A4 1장 / 잘라서 라운드 봉투 겉면에 부착</p></section><section class="labels" aria-label="라운드별 봉투 라벨"><article class="label"><div class="round">1R</div><div class="copy"><div class="main">가짜예술가 카드 8장</div><ul class="rules"><li>열기 전 섞기</li><li class="rule-strong">진행자도 정답 확인 금지</li></ul></div></article><article class="label"><div class="round">2R</div><div class="copy"><div class="main">가짜예술가 카드 8장</div><ul class="rules"><li>열기 전 섞기</li><li class="rule-strong">진행자도 정답 확인 금지</li></ul></div></article><article class="label"><div class="round">3R</div><div class="copy"><div class="main">가짜예술가 카드 8장</div><ul class="rules"><li>열기 전 섞기</li><li class="rule-strong">진행자도 정답 확인 금지</li></ul></div></article><article class="label"><div class="round">4R</div><div class="copy"><div class="main">가짜예술가 카드 8장</div><ul class="rules"><li>열기 전 섞기</li><li class="rule-strong">진행자도 정답 확인 금지</li></ul></div></article><article class="label"><div class="round">5R</div><div class="copy"><div class="main">가짜예술가 카드 8장</div><ul class="rules"><li>열기 전 섞기</li><li class="rule-strong">진행자도 정답 확인 금지</li></ul></div></article></section></main></body></html>

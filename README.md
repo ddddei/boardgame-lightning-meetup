@@ -30,6 +30,17 @@
 3. 메인 또는 피날레 후보: 사보타지
 4. 시간 부족 시 제외 후보: 젝스님트
 
+## 출력물 사용 순서
+
+1. `assets/printables/fake-artist-round-envelopes.html`: 실전용 라운드 카드. 진행자도 플레이어로 참여하므로 정답을 보지 않고 출력·재단한다.
+2. `assets/printables/fake-artist-role-cards.html`: 빈칸 템플릿용 역할 카드. 예비 라운드나 현장 조정이 필요할 때 사용한다.
+3. `assets/printables/fake-artist-vote-memo.html`: 참가자 투표 메모. 가짜예술가 종료 후 지목과 추측을 정리할 때 나눠 준다.
+4. `assets/printables/fake-artist-envelope-labels.html`: 봉투 겉면 라벨. 1R부터 5R까지 잘라서 라운드 봉투에 붙인다.
+5. `assets/printables/host-cue-sheet.html`: 진행자 내부용 큐시트. 시간 배분과 멘트를 당일 손에 들고 확인한다.
+6. `assets/printables/saboteur-quick-rules.html`: 진행자 내부용 사보타지 요약. 사보타지 시작 직전에만 확인한다.
+
+가짜예술가 라운드 카드는 진행자가 정답을 확인하지 않는 것이 핵심이다. 가장 공정한 준비 방식은 다른 사람이 라운드 카드를 잘라 봉투에 넣고, 진행자는 라벨이 붙은 봉투만 받아 당일에 섞어서 여는 것이다.
+
 ## 당일 빠른 판단
 
 - 가짜예술가는 1판이라도 진행한다.
