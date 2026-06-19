@@ -1,241 +1,281 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>진행자 큐시트</title>
-  <style>
-    @page {
-      size: A4;
-      margin: 8mm;
-    }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>진행자 큐시트</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
 
-    * {
-      box-sizing: border-box;
-    }
+      :root {
+        --paper: #ffffff;
+        --ink: #111827;
+        --muted: #374151;
+        --line: #1f2937;
+        --soft-line: #6b7280;
+        --accent: #0f2a44;
+        --shade: #f3f4f6;
+        --space-1: 1.2mm;
+        --space-2: 2mm;
+        --space-3: 3mm;
+        --space-4: 4.5mm;
+      }
 
-    body {
-      margin: 0;
-      color: #1f1f1f;
-      background: #fff;
-      font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", Arial, sans-serif;
-      line-height: 1.28;
-      word-break: keep-all;
-      overflow-wrap: break-word;
-    }
+      * {
+        box-sizing: border-box;
+      }
 
-    .page {
-      width: 194mm;
-      min-height: 281mm;
-      margin: 0 auto;
-    }
-
-    header {
-      display: grid;
-      grid-template-columns: 1.45fr 1.05fr;
-      gap: 5mm;
-      border-bottom: 2px solid #222;
-      padding-bottom: 2.2mm;
-      margin-bottom: 3mm;
-    }
-
-    h1 {
-      margin: 0 0 2mm;
-      font-size: 21pt;
-      letter-spacing: 0;
-    }
-
-    .meta {
-      margin: 0;
-      font-size: 9pt;
-      font-weight: 700;
-    }
-
-    .urgent {
-      border: 1.5px solid #222;
-      padding: 2mm;
-      font-size: 9.4pt;
-      font-weight: 800;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3mm;
-    }
-
-    section {
-      border: 1px solid #444;
-      padding: 2.3mm;
-      break-inside: avoid;
-    }
-
-    .wide {
-      grid-column: 1 / -1;
-    }
-
-    h2 {
-      margin: 0 0 2mm;
-      padding-bottom: 1mm;
-      border-bottom: 1px solid #777;
-      font-size: 12.2pt;
-    }
-
-    ul {
-      margin: 0;
-      padding-left: 4.5mm;
-      font-size: 9.2pt;
-    }
-
-    li {
-      margin: 0.8mm 0;
-    }
-
-    .script {
-      margin: 0;
-      font-size: 9.8pt;
-      font-weight: 700;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 8.7pt;
-    }
-
-    th,
-    td {
-      border: 1px solid #555;
-      padding: 1.25mm;
-      vertical-align: top;
-    }
-
-    th {
-      background: #f2f2f2;
-      font-weight: 800;
-      text-align: center;
-    }
-
-    .time {
-      width: 21mm;
-      text-align: center;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .game {
-      width: 20mm;
-      font-weight: 800;
-      text-align: center;
-    }
-
-    .compact td {
-      padding: 1.15mm;
-    }
-
-    .small {
-      font-size: 8.4pt;
-    }
-
-    @media print {
       body {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", -apple-system,
+          BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.28;
+        word-break: keep-all;
+        overflow-wrap: break-word;
       }
 
       .page {
-        width: auto;
-        min-height: auto;
+        width: 190mm;
+        min-height: 277mm;
+        margin: 0 auto;
       }
-    }
-  </style>
-</head>
-<body>
-  <main class="page">
-    <header>
-      <div>
-        <h1>진행자 큐시트</h1>
-        <p class="meta">기준: 진행자 포함 8명 · 진행자 겸 플레이어 · 2시간 기본 · 18:00 이후 연장 가능</p>
+
+      header {
+        display: grid;
+        grid-template-columns: 1fr 72mm;
+        gap: var(--space-4);
+        align-items: end;
+        border-bottom: 2pt solid var(--line);
+        padding-bottom: var(--space-2);
+        margin-bottom: var(--space-3);
+      }
+
+      h1 {
+        margin: 0 0 var(--space-1);
+        color: var(--accent);
+        font-size: 20pt;
+        line-height: 1.05;
+      }
+
+      .meta {
+        margin: 0;
+        color: var(--muted);
+        font-size: 9pt;
+        font-weight: 800;
+      }
+
+      .priority {
+        border: 1.6pt solid var(--line);
+        padding: var(--space-2);
+        color: var(--accent);
+        font-size: 9.5pt;
+        font-weight: 900;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-3);
+      }
+
+      section {
+        border: 1pt solid var(--line);
+        padding: var(--space-2);
+        break-inside: avoid;
+      }
+
+      .wide {
+        grid-column: 1 / -1;
+      }
+
+      h2 {
+        margin: 0 0 var(--space-2);
+        border-bottom: 1pt solid var(--soft-line);
+        padding-bottom: var(--space-1);
+        color: var(--accent);
+        font-size: 11.2pt;
+        line-height: 1.15;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 4.2mm;
+        font-size: 8.8pt;
+      }
+
+      li {
+        margin: 0.6mm 0;
+      }
+
+      .checklist {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .checklist li::before {
+        content: "□ ";
+        font-weight: 900;
+      }
+
+      .script {
+        margin: 0;
+        font-size: 9.2pt;
+        font-weight: 800;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8.4pt;
+      }
+
+      th,
+      td {
+        border: 1pt solid var(--soft-line);
+        padding: var(--space-1);
+        vertical-align: top;
+      }
+
+      th {
+        background: var(--shade);
+        color: var(--ink);
+        font-weight: 900;
+        text-align: center;
+      }
+
+      .time {
+        width: 18mm;
+        color: var(--accent);
+        font-weight: 900;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .game {
+        width: 20mm;
+        color: var(--accent);
+        font-weight: 900;
+        text-align: center;
+      }
+
+      .decision {
+        border: 1.5pt solid var(--line);
+      }
+
+      .decision strong {
+        color: var(--accent);
+        font-weight: 900;
+      }
+
+      .closing {
+        border-width: 1.5pt;
+      }
+
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+        .page {
+          width: auto;
+          min-height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <div>
+          <h1>진행자 큐시트</h1>
+          <p class="meta">기준: 진행자 포함 8명 · 진행자 겸 플레이어 · 2시간 기본 · 18:00 이후 연장 가능</p>
+        </div>
+        <div class="priority">우선순위: 가짜예술가 필수, 달무티 우선, 사보타지는 메인/피날레 후보, 젝스님트는 여유 있을 때만.</div>
+      </header>
+
+      <div class="grid">
+        <section>
+          <h2>시작 전 체크</h2>
+          <ul class="checklist">
+            <li>8명 자리, 필기구, 휴대폰 타이머</li>
+            <li>가짜예술가 역할 카드 8장, 투표 메모</li>
+            <li>카드 8장을 접어 섞고 진행자 포함 1장씩 배부</li>
+            <li>사보타지 요약은 진행자만 볼 위치</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>오프닝 스크립트</h2>
+          <p class="script">오늘은 2시간 기준으로 가볍게 여러 게임을 해보겠습니다. 저도 같이 플레이하니 세팅, 기록, 카드 정리는 중간중간 나눠 부탁드릴게요. 시간에 맞춰 일부 게임은 조정합니다.</p>
+        </section>
+
+        <section class="wide">
+          <h2>기본 타임테이블</h2>
+          <table>
+            <thead>
+              <tr><th>시간</th><th>진행</th><th>판단 기준</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="time">00:00</td><td>인사, 자리 정리, 오늘 흐름 안내</td><td>진행자도 플레이어, 도움 요청</td></tr>
+              <tr><td class="time">00:05</td><td>가짜예술가 1판, 가능하면 2판</td><td>00:25에는 달무티로 이동</td></tr>
+              <tr><td class="time">00:25</td><td>달무티 2판 이상</td><td>분위기 좋으면 1판 추가</td></tr>
+              <tr><td class="time">01:05</td><td>젝스님트 1판 또는 제외</td><td>설명 길거나 시간이 빠듯하면 제외</td></tr>
+              <tr><td class="time">01:20</td><td>사보타지 1라운드 또는 달무티 추가</td><td>사보타지는 35분 이상 남을 때만</td></tr>
+              <tr><td class="time">01:50</td><td>새 라운드 금지, 현재 판만 정리</td><td>종료 10분 전 새 라운드 금지</td></tr>
+              <tr><td class="time">01:55</td><td>구성품 확인, 마무리 안내</td><td>연장 가능 인원 확인</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="decision">
+          <h2>시간 부족 결정</h2>
+          <table>
+            <tbody>
+              <tr><td class="game">기본 축소</td><td><strong>젝스님트 제외</strong>. 가짜예술가 1판, 달무티 2판 유지.</td></tr>
+              <tr><td class="game">35분 미만</td><td>사보타지 새 시작 금지. 달무티 추가 또는 정리.</td></tr>
+              <tr><td class="game">10분 전</td><td><strong>새 라운드 금지</strong>. 현재 판만 끝내고 구성품 확인.</td></tr>
+              <tr><td class="game">룰 질문</td><td>승리 조건, 차례, 종료 조건만 말하고 시작. 1분 안에 임시 판정.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>진행 중 원칙</h2>
+          <ul>
+            <li>타이머: 시작, 25분, 60분, 종료 10분 전 확인</li>
+            <li>투표, 순위, 카드 섞기는 참가자에게 부탁</li>
+            <li>가짜예술가 카드는 진행자도 자기 카드만 보기</li>
+            <li>투표와 의심 발언은 한 명씩 짧게 기회 주기</li>
+          </ul>
+        </section>
+
+        <section class="wide">
+          <h2>게임 전환 스크립트</h2>
+          <table>
+            <thead>
+              <tr><th>게임</th><th>30초 설명</th><th>넘어갈 말</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="game">가짜예술가</td><td>한 획씩 그림을 잇습니다. 한 명만 X를 받았고, 가짜는 들켜도 정답을 맞히면 기회가 있습니다.</td><td>분위기 풀렸으니 달무티로 넘어가겠습니다.</td></tr>
+              <tr><td class="game">달무티</td><td>먼저 다 내려놓으면 이깁니다. 낮은 숫자가 강하고, 앞사람보다 강하게 내거나 패스합니다.</td><td>여기서 달무티는 마무리하고 시간 보고 다음 게임을 정하겠습니다.</td></tr>
+              <tr><td class="game">젝스님트</td><td>숫자 1장을 동시에 고르고 낮은 숫자부터 붙입니다. 6번째 줄을 가져가며, 벌점이 적을수록 좋습니다.</td><td>짧게 한 판 했으니 마지막 게임으로 넘어가겠습니다.</td></tr>
+              <tr><td class="game">사보타지</td><td>광부는 금까지 길을 잇고 사보타지는 몰래 방해합니다. 역할은 비밀이고 말은 믿거나 의심해도 됩니다.</td><td>현재 라운드까지만 하고 구성품을 확인하겠습니다.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="wide closing">
+          <h2>클로징 스크립트</h2>
+          <p class="script">오늘 게임은 여기서 마무리하겠습니다. 카드와 구성품만 같이 확인하고, 18:00 이후 진행이나 뒤풀이 안내를 바로 이어가겠습니다. 좋았던 점이나 아쉬웠던 점도 짧게 알려주세요.</p>
+        </section>
       </div>
-      <div class="urgent">기본 흐름: 가짜예술가 -> 달무티 -> 젝스님트 -> 사보타지<br>시간 부족 시 젝스님트 제외, 사보타지는 35분 이상 남을 때만 시작</div>
-    </header>
-
-    <div class="grid">
-      <section>
-        <h2>시작 전 체크</h2>
-        <ul>
-          <li>8명 자리, 필기구, 휴대폰 타이머 준비</li>
-          <li>가짜예술가 역할 카드 8장, 투표 메모, 큐시트 준비</li>
-          <li>가짜예술가 카드 8장을 접어 섞고 진행자 포함 1장씩 배부</li>
-          <li>사보타지 룰 요약은 진행자만 볼 위치에 두기</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>오프닝 멘트</h2>
-        <p class="script">오늘은 2시간 기준으로 가볍게 여러 게임을 해보겠습니다. 저도 같이 플레이해서 세팅, 기록, 카드 정리는 중간중간 나눠 부탁드릴게요. 현장 분위기와 시간에 맞춰 일부 게임은 조정될 수 있습니다.</p>
-      </section>
-
-      <section class="wide">
-        <h2>기본 타임테이블</h2>
-        <table>
-          <thead>
-            <tr><th>시간</th><th>진행</th><th>판단</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="time">00:00</td><td>인사, 자리 정리, 진행 방식 안내</td><td>2시간 기준, 일부 게임 조정 가능 안내</td></tr>
-            <tr><td class="time">00:05</td><td>가짜예술가 1판, 가능하면 2판</td><td>00:25에는 달무티로 이동</td></tr>
-            <tr><td class="time">00:25</td><td>달무티 2판 이상</td><td>분위기가 좋으면 1판 추가</td></tr>
-            <tr><td class="time">01:05</td><td>젝스님트 1판 또는 제외 판단</td><td>시간 빠듯하면 제외</td></tr>
-            <tr><td class="time">01:20</td><td>사보타지 1라운드 또는 달무티 추가</td><td>사보타지는 35분 이상 남을 때만</td></tr>
-            <tr><td class="time">01:55</td><td>구성품 확인, 종료 안내</td><td>새 라운드 금지</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section>
-        <h2>축소 판단</h2>
-        <table class="compact">
-          <tbody>
-            <tr><td class="game">시간 부족</td><td>젝스님트 제외, 가짜예술가 1판, 달무티 2판, 사보타지는 35분 이상일 때만</td></tr>
-            <tr><td class="game">분위기 처짐</td><td>가짜예술가 1판 추가 또는 달무티 한 판 더 진행</td></tr>
-            <tr><td class="game">설명 길어짐</td><td>승리 조건, 차례, 종료 조건만 말하고 시작</td></tr>
-            <tr><td class="game">사보타지 늘어짐</td><td>새 라운드 금지, 현재 라운드만 끝내고 정리</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section>
-        <h2>진행자 겸 플레이어 주의</h2>
-        <ul>
-          <li>타이머: 시작, 25분, 60분, 종료 10분 전 확인</li>
-          <li>역할 배분은 무작위, 진행자도 자기 카드만 보기</li>
-          <li>투표, 순위, 카드 섞기는 참가자에게 부탁</li>
-          <li>룰 질문은 1분 안에 임시 판정</li>
-          <li>투표/의심 발언 때 한마디씩 기회 주기</li>
-        </ul>
-      </section>
-
-      <section class="wide">
-        <h2>게임별 설명/전환 멘트</h2>
-        <table class="small">
-          <thead>
-            <tr><th>게임</th><th>30초 설명</th><th>전환 멘트</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="game">가짜예술가</td><td>같은 카테고리 안에서 그림을 한 획씩 이어 그립니다. 한 명만 정답 대신 X를 받은 가짜예술가입니다.</td><td>분위기 풀렸으니 달무티로 넘어가겠습니다.</td></tr>
-            <tr><td class="game">달무티</td><td>카드를 먼저 다 내려놓으면 이깁니다. 숫자가 낮을수록 강하고, 같은 숫자는 여러 장 낼 수 있습니다.</td><td>달무티는 마무리하고 시간 보고 다음 게임을 정하겠습니다.</td></tr>
-            <tr><td class="game">젝스님트</td><td>숫자 카드 1장을 동시에 고르고 낮은 숫자부터 줄에 붙입니다. 6번째 카드가 되면 그 줄을 가져갑니다.</td><td>짧게 한 판 했으니 마지막 게임으로 넘어가겠습니다.</td></tr>
-            <tr><td class="game">사보타지</td><td>광부 팀은 금까지 길을 잇고, 사보타지는 몰래 방해합니다. 역할은 비밀입니다.</td><td>여기서 라운드를 마무리하고 구성품을 확인하겠습니다.</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section class="wide">
-        <h2>마무리 멘트</h2>
-        <p class="script">오늘 게임은 여기서 마무리하겠습니다. 카드와 구성품만 같이 확인하고, 18:00 이후 진행이나 뒤풀이 안내를 바로 이어가겠습니다. 좋았던 점이나 아쉬웠던 점도 짧게 알려주세요.</p>
-      </section>
-    </div>
-  </main>
-</body>
+    </main>
+  </body>
 </html>

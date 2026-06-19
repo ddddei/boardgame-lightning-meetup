@@ -1,235 +1,261 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>가짜예술가 투표 메모</title>
-  <style>
-    @page {
-      size: A4;
-      margin: 12mm;
-    }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>가짜예술가 투표 메모</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
 
-    * {
-      box-sizing: border-box;
-    }
+      :root {
+        --paper: #ffffff;
+        --ink: #111827;
+        --muted: #374151;
+        --line: #1f2937;
+        --soft-line: #6b7280;
+        --accent: #0f2a44;
+        --shade: #f3f4f6;
+        --space-1: 1.5mm;
+        --space-2: 2.5mm;
+        --space-3: 4mm;
+        --space-4: 6mm;
+      }
 
-    body {
-      margin: 0;
-      color: #1f1f1f;
-      background: #fff;
-      font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", Arial, sans-serif;
-      line-height: 1.35;
-      word-break: keep-all;
-      overflow-wrap: break-word;
-    }
+      * {
+        box-sizing: border-box;
+      }
 
-    .page {
-      width: 186mm;
-      min-height: 273mm;
-      margin: 0 auto;
-    }
-
-    header {
-      border-bottom: 2px solid #222;
-      padding-bottom: 3mm;
-      margin-bottom: 4mm;
-    }
-
-    h1 {
-      margin: 0 0 2mm;
-      font-size: 22pt;
-      letter-spacing: 0;
-    }
-
-    .notice {
-      margin: 0;
-      font-size: 10.5pt;
-      font-weight: 700;
-    }
-
-    .memos {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 4mm;
-    }
-
-    .memo {
-      min-height: 76mm;
-      border: 1.4pt dashed #222;
-      padding: 3.8mm;
-      break-inside: avoid;
-    }
-
-    .memo-head {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4mm;
-      margin-bottom: 3mm;
-      font-weight: 800;
-      font-size: 11pt;
-    }
-
-    .blank {
-      display: inline-block;
-      min-width: 22mm;
-      border-bottom: 1.2pt solid #222;
-      transform: translateY(-1px);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 10pt;
-    }
-
-    th,
-    td {
-      border: 1px solid #555;
-      padding: 2mm 1.8mm;
-      vertical-align: top;
-    }
-
-    th {
-      background: #f2f2f2;
-      font-weight: 800;
-      text-align: center;
-    }
-
-    .name-col {
-      width: 34%;
-    }
-
-    .vote-col {
-      width: 28%;
-    }
-
-    .note-col {
-      width: 38%;
-    }
-
-    .footer-note {
-      margin-top: 2mm;
-      border-top: 1px dotted #777;
-      padding-top: 1.5mm;
-      font-size: 9pt;
-      color: #444;
-      text-align: center;
-    }
-
-    @media print {
       body {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", -apple-system,
+          BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.35;
+        word-break: keep-all;
+        overflow-wrap: break-word;
       }
 
       .page {
-        width: auto;
-        min-height: auto;
+        width: 190mm;
+        min-height: 277mm;
+        margin: 0 auto;
       }
-    }
-  </style>
-</head>
-<body>
-  <main class="page">
-    <header>
-      <h1>가짜예술가 투표 메모</h1>
-      <p class="notice">라운드별로 잘라 쓰는 메모입니다. 이름이나 번호로 기록하고, 토론 중 나온 단서를 간단히 적습니다.</p>
-    </header>
 
-    <section class="memos" aria-label="투표 메모 4개">
-      <article class="memo">
-        <div class="memo-head">
-          <div>라운드 <span class="blank"></span></div>
-          <div>가짜예술가 <span class="blank"></span></div>
-        </div>
-        <table>
-          <thead>
-            <tr><th class="name-col">번호/이름</th><th class="vote-col">투표</th><th class="note-col">메모</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>1</td><td></td><td></td></tr>
-            <tr><td>2</td><td></td><td></td></tr>
-            <tr><td>3</td><td></td><td></td></tr>
-            <tr><td>4</td><td></td><td></td></tr>
-            <tr><td>5</td><td></td><td></td></tr>
-            <tr><td>6</td><td></td><td></td></tr>
-            <tr><td>7</td><td></td><td></td></tr>
-            <tr><td>8</td><td></td><td></td></tr>
-          </tbody>
-        </table>
-        <div class="footer-note">절취선</div>
-      </article>
+      header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-4);
+        align-items: end;
+        border-bottom: 2pt solid var(--line);
+        padding-bottom: var(--space-1);
+        margin-bottom: var(--space-2);
+      }
 
-      <article class="memo">
-        <div class="memo-head">
-          <div>라운드 <span class="blank"></span></div>
-          <div>가짜예술가 <span class="blank"></span></div>
-        </div>
-        <table>
-          <thead>
-            <tr><th class="name-col">번호/이름</th><th class="vote-col">투표</th><th class="note-col">메모</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>1</td><td></td><td></td></tr>
-            <tr><td>2</td><td></td><td></td></tr>
-            <tr><td>3</td><td></td><td></td></tr>
-            <tr><td>4</td><td></td><td></td></tr>
-            <tr><td>5</td><td></td><td></td></tr>
-            <tr><td>6</td><td></td><td></td></tr>
-            <tr><td>7</td><td></td><td></td></tr>
-            <tr><td>8</td><td></td><td></td></tr>
-          </tbody>
-        </table>
-        <div class="footer-note">절취선</div>
-      </article>
+      h1 {
+        margin: 0 0 var(--space-1);
+        color: var(--accent);
+        font-size: 19pt;
+        line-height: 1.05;
+      }
 
-      <article class="memo">
-        <div class="memo-head">
-          <div>라운드 <span class="blank"></span></div>
-          <div>가짜예술가 <span class="blank"></span></div>
-        </div>
-        <table>
-          <thead>
-            <tr><th class="name-col">번호/이름</th><th class="vote-col">투표</th><th class="note-col">메모</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>1</td><td></td><td></td></tr>
-            <tr><td>2</td><td></td><td></td></tr>
-            <tr><td>3</td><td></td><td></td></tr>
-            <tr><td>4</td><td></td><td></td></tr>
-            <tr><td>5</td><td></td><td></td></tr>
-            <tr><td>6</td><td></td><td></td></tr>
-            <tr><td>7</td><td></td><td></td></tr>
-            <tr><td>8</td><td></td><td></td></tr>
-          </tbody>
-        </table>
-        <div class="footer-note">절취선</div>
-      </article>
+      .notice {
+        margin: 0;
+        color: var(--muted);
+        font-size: 9.6pt;
+        font-weight: 700;
+      }
 
-      <article class="memo">
-        <div class="memo-head">
-          <div>라운드 <span class="blank"></span></div>
-          <div>가짜예술가 <span class="blank"></span></div>
+      .use-note {
+        border: 1.4pt solid var(--line);
+        padding: var(--space-1) var(--space-2);
+        color: var(--accent);
+        font-size: 10pt;
+        font-weight: 900;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .memos {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-2);
+      }
+
+      .memo {
+        min-height: 70mm;
+        border: 1.6pt dashed var(--line);
+        padding: var(--space-2);
+        break-inside: avoid;
+      }
+
+      .memo-inner {
+        min-height: 100%;
+        border: 1pt solid var(--soft-line);
+        padding: var(--space-2);
+      }
+
+      .memo-title {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-3);
+        align-items: center;
+        border-bottom: 1.2pt solid var(--line);
+        padding-bottom: var(--space-1);
+        margin-bottom: var(--space-1);
+        color: var(--accent);
+        font-size: 12.5pt;
+        font-weight: 900;
+      }
+
+      .cut-label {
+        color: var(--muted);
+        font-size: 8.5pt;
+        font-weight: 800;
+      }
+
+      .field {
+        display: grid;
+        grid-template-columns: 36mm 1fr;
+        gap: var(--space-2);
+        align-items: end;
+        margin-top: var(--space-1);
+        font-size: 11pt;
+        font-weight: 900;
+      }
+
+      .field:first-of-type {
+        margin-top: 0;
+      }
+
+      .blank {
+        min-height: 7mm;
+        border-bottom: 1.4pt solid var(--line);
+      }
+
+      .memo-area {
+        margin-top: var(--space-2);
+        border: 1pt solid var(--line);
+      }
+
+      .memo-area-title {
+        margin: 0;
+        border-bottom: 1pt solid var(--line);
+        background: var(--shade);
+        padding: var(--space-1) var(--space-2);
+        font-size: 10pt;
+        font-weight: 900;
+      }
+
+      .memo-lines {
+        padding: var(--space-1) var(--space-2) var(--space-2);
+      }
+
+      .memo-line {
+        height: 7mm;
+        border-bottom: 1pt dotted var(--soft-line);
+      }
+
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+        .page {
+          width: auto;
+          min-height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <div>
+          <h1>가짜예술가 투표 메모</h1>
+          <p class="notice">라운드마다 한 장씩 잘라 쓰는 빠른 제출용 메모입니다. 번호나 이름만 적고 바로 모읍니다.</p>
         </div>
-        <table>
-          <thead>
-            <tr><th class="name-col">번호/이름</th><th class="vote-col">투표</th><th class="note-col">메모</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>1</td><td></td><td></td></tr>
-            <tr><td>2</td><td></td><td></td></tr>
-            <tr><td>3</td><td></td><td></td></tr>
-            <tr><td>4</td><td></td><td></td></tr>
-            <tr><td>5</td><td></td><td></td></tr>
-            <tr><td>6</td><td></td><td></td></tr>
-            <tr><td>7</td><td></td><td></td></tr>
-            <tr><td>8</td><td></td><td></td></tr>
-          </tbody>
-        </table>
-        <div class="footer-note">절취선</div>
-      </article>
-    </section>
-  </main>
-</body>
+        <div class="use-note">6장 절취</div>
+      </header>
+
+      <section class="memos" aria-label="가짜예술가 투표 메모 6장">
+        <article class="memo">
+          <div class="memo-inner">
+            <div class="memo-title"><span>투표 메모</span><span class="cut-label">절취선</span></div>
+            <div class="field"><span>라운드</span><span class="blank"></span></div>
+            <div class="field"><span>의심 번호/이름</span><span class="blank"></span></div>
+            <div class="memo-area">
+              <p class="memo-area-title">간단 메모</p>
+              <div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="memo">
+          <div class="memo-inner">
+            <div class="memo-title"><span>투표 메모</span><span class="cut-label">절취선</span></div>
+            <div class="field"><span>라운드</span><span class="blank"></span></div>
+            <div class="field"><span>의심 번호/이름</span><span class="blank"></span></div>
+            <div class="memo-area">
+              <p class="memo-area-title">간단 메모</p>
+              <div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="memo">
+          <div class="memo-inner">
+            <div class="memo-title"><span>투표 메모</span><span class="cut-label">절취선</span></div>
+            <div class="field"><span>라운드</span><span class="blank"></span></div>
+            <div class="field"><span>의심 번호/이름</span><span class="blank"></span></div>
+            <div class="memo-area">
+              <p class="memo-area-title">간단 메모</p>
+              <div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="memo">
+          <div class="memo-inner">
+            <div class="memo-title"><span>투표 메모</span><span class="cut-label">절취선</span></div>
+            <div class="field"><span>라운드</span><span class="blank"></span></div>
+            <div class="field"><span>의심 번호/이름</span><span class="blank"></span></div>
+            <div class="memo-area">
+              <p class="memo-area-title">간단 메모</p>
+              <div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="memo">
+          <div class="memo-inner">
+            <div class="memo-title"><span>투표 메모</span><span class="cut-label">절취선</span></div>
+            <div class="field"><span>라운드</span><span class="blank"></span></div>
+            <div class="field"><span>의심 번호/이름</span><span class="blank"></span></div>
+            <div class="memo-area">
+              <p class="memo-area-title">간단 메모</p>
+              <div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="memo">
+          <div class="memo-inner">
+            <div class="memo-title"><span>투표 메모</span><span class="cut-label">절취선</span></div>
+            <div class="field"><span>라운드</span><span class="blank"></span></div>
+            <div class="field"><span>의심 번호/이름</span><span class="blank"></span></div>
+            <div class="memo-area">
+              <p class="memo-area-title">간단 메모</p>
+              <div class="memo-lines"><div class="memo-line"></div><div class="memo-line"></div><div class="memo-line"></div></div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
 </html>

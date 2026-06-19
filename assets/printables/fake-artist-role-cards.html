@@ -10,108 +10,155 @@
         margin: 12mm;
       }
 
+      :root {
+        --paper: #ffffff;
+        --ink: #111827;
+        --muted: #374151;
+        --line: #1f2937;
+        --soft-line: #6b7280;
+        --accent: #0f2a44;
+        --shade: #f3f4f6;
+        --space-1: 1.5mm;
+        --space-2: 2.5mm;
+        --space-3: 4mm;
+        --space-4: 6mm;
+      }
+
       * {
         box-sizing: border-box;
       }
 
       body {
         margin: 0;
-        color: #1f1f1f;
-        background: #fff;
+        color: var(--ink);
+        background: var(--paper);
         font-family:
-          "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", Arial,
-          sans-serif;
+          "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", -apple-system,
+          BlinkMacSystemFont, "Segoe UI", sans-serif;
         line-height: 1.35;
+        word-break: keep-all;
+        overflow-wrap: break-word;
       }
 
       .page {
         width: 186mm;
         min-height: 273mm;
         margin: 0 auto;
-        padding: 0;
       }
 
       header {
-        border-bottom: 2px solid #222;
-        padding-bottom: 3mm;
-        margin-bottom: 4mm;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-4);
+        align-items: end;
+        border-bottom: 2pt solid var(--line);
+        padding-bottom: var(--space-2);
+        margin-bottom: var(--space-3);
       }
 
       h1 {
-        margin: 0 0 2mm;
-        font-size: 22pt;
-        letter-spacing: 0;
+        margin: 0 0 var(--space-1);
+        color: var(--accent);
+        font-size: 20pt;
+        line-height: 1.05;
       }
 
       .notice {
         margin: 0;
+        color: var(--muted);
         font-size: 10.5pt;
         font-weight: 700;
+      }
+
+      .count {
+        border: 1.4pt solid var(--line);
+        padding: var(--space-1) var(--space-2);
+        color: var(--accent);
+        font-size: 11pt;
+        font-weight: 900;
+        text-align: center;
+        white-space: nowrap;
       }
 
       .cards {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 4mm;
+        gap: var(--space-3);
       }
 
       .card {
-        height: 42mm;
-        border: 1.6pt dashed #222;
-        padding: 3.5mm 4mm;
+        height: 58mm;
+        border: 1.6pt dashed var(--line);
+        padding: var(--space-2);
         break-inside: avoid;
+      }
+
+      .safe-zone {
+        height: 100%;
+        border: 1pt solid var(--soft-line);
+        padding: var(--space-3);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
       }
 
-      .card-number {
+      .card-meta {
         display: flex;
         justify-content: space-between;
-        gap: 6mm;
-        font-size: 10pt;
-        font-weight: 700;
-        color: #444;
-      }
-
-      .card-title {
-        margin: 2.5mm 0 1.5mm;
-        text-align: center;
-        font-size: 15pt;
+        gap: var(--space-3);
+        color: var(--muted);
+        font-size: 9.5pt;
         font-weight: 800;
       }
 
+      .role {
+        margin: 0;
+        color: var(--accent);
+        font-size: 16pt;
+        font-weight: 900;
+        text-align: center;
+      }
+
       .fields {
-        border-top: 1px solid #777;
-        padding-top: 2mm;
+        display: grid;
+        gap: var(--space-2);
       }
 
       .field {
         display: grid;
-        grid-template-columns: 23mm 1fr;
-        gap: 2.5mm;
+        grid-template-columns: 24mm 1fr;
+        gap: var(--space-2);
         align-items: end;
-        margin-top: 2mm;
         font-size: 12pt;
-        font-weight: 800;
+        font-weight: 900;
       }
 
-      .field:first-child {
-        margin-top: 0;
+      .label {
+        color: var(--ink);
       }
 
       .line {
-        min-height: 6.5mm;
-        border-bottom: 1.2pt solid #222;
+        min-height: 8mm;
+        border-bottom: 1.4pt solid var(--line);
         text-align: center;
-        font-size: 16pt;
+        font-size: 18pt;
         font-weight: 900;
-        line-height: 1.1;
+        line-height: 1;
       }
 
       .x-value {
-        font-size: 21pt;
+        color: var(--ink);
         letter-spacing: 2pt;
+      }
+
+      .fold-note {
+        margin: 0;
+        border-top: 1pt dotted var(--soft-line);
+        padding-top: var(--space-1);
+        color: var(--muted);
+        font-size: 8.8pt;
+        font-weight: 700;
+        text-align: center;
       }
 
       @media print {
@@ -130,117 +177,107 @@
   <body>
     <main class="page">
       <header>
-        <h1>가짜예술가 역할 카드</h1>
-        <p class="notice">
-          8장을 모두 접어 섞은 뒤, 진행자를 포함한 8명에게 1장씩 배부합니다.
-          진행자도 자기 카드만 보고 참여합니다.
-        </p>
+        <div>
+          <h1>가짜예술가 역할 카드</h1>
+          <p class="notice">접어 섞은 뒤 진행자 포함 8명에게 1장씩 배부합니다. 진행자도 자기 카드만 봅니다.</p>
+        </div>
+        <div class="count">예술가 7장 + X 1장</div>
       </header>
 
-      <section class="cards" aria-label="역할 카드 8장">
+      <section class="cards" aria-label="가짜예술가 역할 카드 8장">
         <article class="card">
-          <div class="card-number">
-            <span>카드 1</span><span>역할 카드</span>
-          </div>
-          <div class="card-title">예술가</div>
-          <div class="fields">
-            <div class="field">
-              <span>카테고리</span><span class="line"></span>
+          <div class="safe-zone">
+            <div class="card-meta"><span>카드 1</span><span>역할 카드</span></div>
+            <p class="role">예술가</p>
+            <div class="fields">
+              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
+              <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <div class="field"><span>정답</span><span class="line"></span></div>
+            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
-          <div class="card-number">
-            <span>카드 2</span><span>역할 카드</span>
-          </div>
-          <div class="card-title">예술가</div>
-          <div class="fields">
-            <div class="field">
-              <span>카테고리</span><span class="line"></span>
+          <div class="safe-zone">
+            <div class="card-meta"><span>카드 2</span><span>역할 카드</span></div>
+            <p class="role">예술가</p>
+            <div class="fields">
+              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
+              <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <div class="field"><span>정답</span><span class="line"></span></div>
+            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
-          <div class="card-number">
-            <span>카드 3</span><span>역할 카드</span>
-          </div>
-          <div class="card-title">예술가</div>
-          <div class="fields">
-            <div class="field">
-              <span>카테고리</span><span class="line"></span>
+          <div class="safe-zone">
+            <div class="card-meta"><span>카드 3</span><span>역할 카드</span></div>
+            <p class="role">예술가</p>
+            <div class="fields">
+              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
+              <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <div class="field"><span>정답</span><span class="line"></span></div>
+            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
-          <div class="card-number">
-            <span>카드 4</span><span>역할 카드</span>
-          </div>
-          <div class="card-title">예술가</div>
-          <div class="fields">
-            <div class="field">
-              <span>카테고리</span><span class="line"></span>
+          <div class="safe-zone">
+            <div class="card-meta"><span>카드 4</span><span>역할 카드</span></div>
+            <p class="role">예술가</p>
+            <div class="fields">
+              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
+              <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <div class="field"><span>정답</span><span class="line"></span></div>
+            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
-          <div class="card-number">
-            <span>카드 5</span><span>역할 카드</span>
-          </div>
-          <div class="card-title">예술가</div>
-          <div class="fields">
-            <div class="field">
-              <span>카테고리</span><span class="line"></span>
+          <div class="safe-zone">
+            <div class="card-meta"><span>카드 5</span><span>역할 카드</span></div>
+            <p class="role">예술가</p>
+            <div class="fields">
+              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
+              <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <div class="field"><span>정답</span><span class="line"></span></div>
+            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
-          <div class="card-number">
-            <span>카드 6</span><span>역할 카드</span>
-          </div>
-          <div class="card-title">예술가</div>
-          <div class="fields">
-            <div class="field">
-              <span>카테고리</span><span class="line"></span>
+          <div class="safe-zone">
+            <div class="card-meta"><span>카드 6</span><span>역할 카드</span></div>
+            <p class="role">예술가</p>
+            <div class="fields">
+              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
+              <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <div class="field"><span>정답</span><span class="line"></span></div>
+            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
-          <div class="card-number">
-            <span>카드 7</span><span>역할 카드</span>
-          </div>
-          <div class="card-title">예술가</div>
-          <div class="fields">
-            <div class="field">
-              <span>카테고리</span><span class="line"></span>
+          <div class="safe-zone">
+            <div class="card-meta"><span>카드 7</span><span>역할 카드</span></div>
+            <p class="role">예술가</p>
+            <div class="fields">
+              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
+              <div class="field"><span class="label">정답</span><span class="line"></span></div>
             </div>
-            <div class="field"><span>정답</span><span class="line"></span></div>
+            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
           </div>
         </article>
 
         <article class="card">
-          <div class="card-number">
-            <span>카드 8</span><span>역할 카드</span>
-          </div>
-          <div class="card-title">가짜예술가</div>
-          <div class="fields">
-            <div class="field">
-              <span>카테고리</span><span class="line"></span>
+          <div class="safe-zone">
+            <div class="card-meta"><span>카드 8</span><span>역할 카드</span></div>
+            <p class="role">가짜예술가</p>
+            <div class="fields">
+              <div class="field"><span class="label">카테고리</span><span class="line"></span></div>
+              <div class="field"><span class="label">정답</span><span class="line x-value">X</span></div>
             </div>
-            <div class="field">
-              <span>정답</span><span class="line x-value">X</span>
-            </div>
+            <p class="fold-note">절취선 바깥쪽을 자르고, 내용이 안 보이게 접기</p>
           </div>
         </article>
       </section>
