@@ -146,7 +146,7 @@ h1 {
 }
 .neon-strip {
   height:3.2mm;
-  background:linear-gradient(90deg,var(--accent,var(--blue)) 0%, color-mix(in srgb, var(--accent,var(--blue)) 78%, white) 75%, #fff 160%);
+  background:linear-gradient(90deg,#e5e7eb 0%, #f8fafc 75%, #fff 160%);
   position:relative;
 }
 .neon-strip::after { content:""; position:absolute; left:0; right:0; bottom:-.35mm; height:.35mm; background:rgba(7,16,31,.12); }
@@ -213,14 +213,9 @@ h1 {
 .card { height:55mm; padding:2mm; --accent:var(--blue); }
 .card:not(.fake):nth-child(4n+2) { --accent:var(--yellow); }
 .card:not(.fake):nth-child(4n+3) { --accent:var(--green); }
-.card.fake { --accent:var(--pink); border-color:#b81876; }
+.card.fake { --accent:var(--pink); }
 .card-body { height:calc(100% - 3.2mm); padding:2.25mm 3mm 2mm; display:flex; flex-direction:column; justify-content:space-between; }
 .fields { display:grid; gap:1.9mm; }
-.fake .inner { border-color:#edafd9; }
-.fake .neon-strip { background:linear-gradient(90deg,var(--pink),var(--purple)); }
-.fake .meta span:last-child { background:#fff0fa; color:#a50f6b; border-color:#f6c7e8; }
-.fake .field-label { border-left-color:var(--pink); }
-.card.fake .field-value { border-bottom-color:#8e185f; }
 .x-value { letter-spacing:2pt; }
 </style></head><body><main>
 <section class="round-page" aria-label="가짜예술가 1라운드 카드">
